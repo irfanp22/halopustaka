@@ -1,0 +1,16 @@
+.ukur {
+  height: 100vh!important;
+  object-fit: cover!important;
+  object-position: center!important;
+}
+.zoom{
+  transition: transform .2s;
+}
+.zoom:hover{
+  -ms-transform: scale(1.1)!important;
+  -webkit-transform: scale(1.1)!important;
+  transform: scale(1.1)!important; 
+}
+a:hover{
+  text-decoration: none!important;
+}
