@@ -4,7 +4,8 @@ if (isset($_POST['tambahpeminjaman'])) {
     $id_buku = $_POST['id_buku'];
     $nim = $_POST['nim'];
     $status = "process";
-    $query = "INSERT INTO peminjaman(id_buku, nim, tanggal_pinjam, status) VALUES('$id_buku', '$nim', CURRENT_DATE, '$status')";
+    $tgl = date('Y-m-d H:i:s');
+    $query = "INSERT INTO peminjaman(id_buku, nim, tanggal_pinjam, status) VALUES('$id_buku', '$nim', '$tgl', '$status')";
     $sql = mysqli_query($koneksi, $query);
     if ($sql) {
         echo "<script>
@@ -31,7 +32,8 @@ if (isset($_GET['id_del'])) {
 }
 if (isset($_GET['id_acc'])) {
     $id = htmlspecialchars($_GET["id_acc"]);
-    $sql = "UPDATE peminjaman SET tanggal_pinjam = CURRENT_DATE, status = 'process' WHERE id_peminjaman='$id'";
+    $tgl = date('Y-m-d H:i:s');
+    $sql = "UPDATE peminjaman SET tanggal_pinjam = '$tgl', status = 'process' WHERE id_peminjaman='$id'";
     $hasil = mysqli_query($koneksi, $sql);
     if ($hasil) {
         echo "<script>swal('Peminjaman Berhasil Dikonfirmasi', '', 'success').then(function(){
@@ -86,7 +88,7 @@ if (isset($_GET['id_acc'])) {
                                                 else echo "badge-warning" ?> text-uppercase"><?php echo $data['status'] ?></td>
                             <td><a href="#" data-toggle="modal" data-target="#detailModal" data-id="<?php echo $data['id_peminjaman'] ?>" class="btn btn-primary btndetailpeminjaman"><i class="fas fa-circle-info"></i></a>
                                 <?php if ($data['status'] == 'book') echo '<a href="?page=viewpeminjaman&id_acc=' . $data['id_peminjaman'] . '" class="btn btn-success confirmAcc" id="btnacc"><i class="fas fa-check"></i></a>';
-                                    else echo '<a href="#" class="btn btn-warning btneditpeminjaman" data-toggle="modal" data-target="#editPeminjaman" data-id="'.$data["id_peminjaman"].'"><i class="fas fa-pen-to-square"></i></a>' ?>
+                                    elseif($data['status'] == 'process') echo '<a href="#" class="btn btn-warning btneditpeminjaman" data-toggle="modal" data-target="#editPeminjaman" data-id="'.$data["id_peminjaman"].'"><i class="fas fa-pen-to-square"></i></a>' ?>
                                 <a href="?page=viewpeminjaman&id_del=<?php echo $data['id_peminjaman'] ?>" class="btn btn-danger confirmAlert" id="btnhapus"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
@@ -197,14 +199,14 @@ if (isset($_GET['id_acc'])) {
                         </div>
                         <div class="col-sm-8 text-secondary">
                             <select name="id_buku" id="id_buku" class="form-control" required>
-                                <option value="" class="form-control">-- pilih buku --</option>
+                                <option value="">-- pilih buku --</option>
                                 <?php
                                 $sql = mysqli_query($koneksi, "SELECT * FROM buku");
                                 while ($data = mysqli_fetch_array($sql)) {
                                     $sedia = mysqli_fetch_array(mysqli_query($koneksi, "SELECT COUNT(id_buku) AS sedia FROM peminjaman WHERE id_buku='" . $data['id_buku'] . "' AND status != 'done'"));
                                     if (($data['stok'] - $sedia['sedia']) > 0) {
                                         echo '
-                                    <option value="' . $data['id_buku'] . '" class="form-control">' . $data['id_buku'] . ' - ' . $data['judul'] . '</option>';
+                                    <option value="' . $data['id_buku'] . '">' . $data['id_buku'] . ' - ' . $data['judul'] . '</option>';
                                     }
                                 } ?>
                             </select>
@@ -216,7 +218,7 @@ if (isset($_GET['id_acc'])) {
                             <h6 class="mb-0">Anggota</h6>
                         </div>
                         <div class="col-sm-8 text-secondary">
-                            <select name="nim" id="nim" class="form-control" required>
+                            <select name="nim" id="inpnim" class="form-control" required>
                                 <option value="" class="form-control">-- pilih anggota --</option>
                                 <?php
                                 $sql = mysqli_query($koneksi, "SELECT * FROM anggota");

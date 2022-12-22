@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="css/<?php echo $css ?>">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <style>
+    #repbln .selectize-control {
+        width: 125px !important;
+        }
+    </style>
 </head>
 <body>
 

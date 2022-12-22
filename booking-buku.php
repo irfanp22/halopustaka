@@ -6,7 +6,8 @@
     $id_buku = $_POST['id_buku'];
     $nim = $_POST['nim'];
 
-    $query = mysqli_query($koneksi, "INSERT INTO peminjaman(id_buku, nim, tanggal_pinjam, status) VALUES('$id_buku', '$nim', CURRENT_DATE, 'book')");
+    $tgl = date('Y-m-d H:i:s');
+    $query = mysqli_query($koneksi, "INSERT INTO peminjaman(id_buku, nim, tanggal_pinjam, status) VALUES('$id_buku', '$nim', '$tgl', 'book')");
     if(mysqli_affected_rows($koneksi)){
         echo "fin";
     }else{
