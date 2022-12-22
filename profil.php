@@ -134,7 +134,7 @@ if(isset($_GET['id'])){
                             <td><?php echo $data["tanggal_pinjam"] ?></td>
                             <td><?php echo $data["tanggal_kembali"] ?></td>
                             <td><?php echo $data["denda"] ?></td>
-                            <td><span class="badge badge-warning text-uppercase"><?php echo $data["status"] ?></span></td>
+                            <td><span class="badge <?php if($data['status']=='done') echo 'badge-success'; elseif($data['status']=='process') echo 'badge-primary'; else echo 'badge-warning'?> text-uppercase"><?php echo $data["status"] ?></span></td>
                             <td><?php if($data['status']=='book') echo'<a href="profil.php?id='.$data["id_peminjaman"].'" class="btn btn-danger confirmAlert" id="btnhapus">Batal</a>' ?></td>
                         </tr>
                     <?php
