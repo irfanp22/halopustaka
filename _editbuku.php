@@ -58,7 +58,7 @@ if (isset($_POST['editbuku'])) {
 }
 ?>
 <div class="container">
-    <div class="card" style="margin-top: 100px;">
+    <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
             <h4 class="text-center">Edit Buku Perpustakaan</h4>
             <form action="dashboard.php?page=editbuku&id=<?php echo $_GET['id'] ?>" method="post" name="editbuku" enctype="multipart/form-data">
@@ -85,7 +85,7 @@ if (isset($_POST['editbuku'])) {
                         <h6 class="mb-0">Pengarang</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="text" name="pengarang" id="pengarang" class="form-control" placeholder="Masukan Pengarang"  value="<?php echo $data['pengarang'] ?>" required>
+                        <input type="text" name="pengarang" id="pengarang" class="form-control" placeholder="Masukan Pengarang" value="<?php echo $data['pengarang'] ?>" required>
                     </div>
                 </div>
                 <hr>
@@ -94,7 +94,7 @@ if (isset($_POST['editbuku'])) {
                         <h6 class="mb-0">Penerbit</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="text" name="penerbit" id="penerbit" class="form-control" placeholder="Masukan Penerbit" required>
+                        <input type="text" name="penerbit" id="penerbit" class="form-control" placeholder="Masukan Penerbit" value="<?php echo $data['penerbit'] ?>" required>
                     </div>
                 </div>
                 <hr>
@@ -121,7 +121,7 @@ if (isset($_POST['editbuku'])) {
                         <h6 class="mb-0">Keterangan</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="text" name="keterangan" id="keterangan" class="form-control" placeholder="Masukan Keterangan">
+                        <input type="text" name="keterangan" id="keterangan" class="form-control" placeholder="Masukan Keterangan" value="<?php echo $data['keterangan'] ?>">
                     </div>
                 </div>
                 <hr>

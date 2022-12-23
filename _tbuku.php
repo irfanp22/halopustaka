@@ -4,10 +4,6 @@ if (isset($_SESSION['role'])) {
         header("Location: index.php");
     }
 }
-$hal = $_GET['page'];
-if ($hal == "tbuku") {
-    $tabel_masuk = "buku";
-}
 
 if (isset($_POST['tambahkategori'])) {
     $nama = $_POST['namakategori'];
@@ -50,10 +46,10 @@ if (isset($_POST['tambahbuku'])) {
     $rak = $_POST['rak'];
 
     if (!empty($_FILES['pic']['name'])) {
-        if($query = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM $tabel_masuk ORDER BY id_buku DESC LIMIT 1"))){
-            $idprev = $query['id_pengurus'];
+        if($query = mysqli_fetch_array(mysqli_query($koneksi, "SELECT id_buku FROM buku ORDER BY id_buku DESC LIMIT 1"))){
+            $idprev = $query['id_buku'];
             $awl = substr($idprev, 0, 2);
-            $no = intval(end(explode('G', $idprev, 3))) + 1;
+            $no = intval(end(explode('K', $idprev, 3))) + 1;
             $id = $awl.sprintf("%03d", $no);
         }else{
             $id = "BK001";
@@ -63,7 +59,7 @@ if (isset($_POST['tambahbuku'])) {
         $fulldir = "assets/img/buku/" . $namafoto;
         $dir = "buku/";
         $foto = $dir . $namafoto;
-        $query = "INSERT INTO $tabel_masuk(judul, isbn, pengarang, penerbit, tahun_terbit, stok, keterangan, id_kategori, id_rak, pic) VALUES('$judul', '$isbn', '$pengarang', '$penerbit', '$thnterbit', '$stok', '$keterangan', '$kategori', '$rak','$foto')";
+        $query = "INSERT INTO buku(judul, isbn, pengarang, penerbit, tahun_terbit, stok, keterangan, id_kategori, id_rak, pic) VALUES('$judul', '$isbn', '$pengarang', '$penerbit', '$thnterbit', '$stok', '$keterangan', '$kategori', '$rak','$foto')";
         $sql = mysqli_query($koneksi, $query);
         if ($sql) {
             move_uploaded_file($lokasifoto, $fulldir);
@@ -76,7 +72,7 @@ if (isset($_POST['tambahbuku'])) {
                 swal('Data Buku Gagal Ditambahkan!', '', 'error');
                 </script>";
     } else {
-        $query = "INSERT INTO $tabel_masuk(judul, isbn, pengarang, penerbit, tahun_terbit, stok, keterangan, id_kategori, id_rak) VALUES('$judul', '$isbn', '$pengarang', '$penerbit', '$thnterbit', '$stok', '$keterangan', '$kategori', '$rak')";
+        $query = "INSERT INTO buku(judul, isbn, pengarang, penerbit, tahun_terbit, stok, keterangan, id_kategori, id_rak) VALUES('$judul', '$isbn', '$pengarang', '$penerbit', '$thnterbit', '$stok', '$keterangan', '$kategori', '$rak')";
         $sql = mysqli_query($koneksi, $query);
         if ($sql) {
             echo "<script>
@@ -91,7 +87,7 @@ if (isset($_POST['tambahbuku'])) {
 }
 ?>
 <div class="container">
-    <div class="card" style="margin-top: 100px;">
+    <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
             <h4 class="text-center">Tambah Buku Perpustakaan</h4>
             <form action="dashboard.php?page=tbuku" method="post" name="tambahbuku" enctype="multipart/form-data">

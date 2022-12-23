@@ -16,7 +16,8 @@
         $data['penerbit'] = $row['penerbit'];
         $data['thnterbit'] = $row['tahun_terbit'];
         $data['stok'] = $row['stok'];
-        $sedia = mysqli_fetch_array(mysqli_query($koneksi, "SELECT COUNT(id_buku) AS sedia FROM peminjaman WHERE status != 'done'"));
+        $id = $data['id_buku'];
+        $sedia = mysqli_fetch_array(mysqli_query($koneksi, "SELECT COUNT(id_buku) AS sedia FROM peminjaman WHERE id_buku = '$id' AND status != 'done'"));
         $data['sedia'] = $row['stok'] - $sedia['sedia'];
         $data['keterangan'] = $row['keterangan'];
         $data['jilid'] = $row['pic'];

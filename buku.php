@@ -40,7 +40,8 @@ if(isset($_SESSION['username']) && $_SESSION['role']=="pengurus") header('locati
                             <td><?php echo $data["nama_kategori"] ?></td>
                             <td><?php echo $data["stok"] ?></td>
                             <?php
-                                $sedia = mysqli_fetch_array(mysqli_query($koneksi, "SELECT COUNT(id_buku) AS sedia FROM peminjaman WHERE status != 'done'"));
+                                $id=$data['id_buku'];
+                                $sedia = mysqli_fetch_array(mysqli_query($koneksi, "SELECT COUNT(id_buku) AS sedia FROM peminjaman WHERE id_buku = '$id' AND status != 'done'"));
                             ?>
                             <td><?php echo $data['stok']-$sedia['sedia']  ?></td>
                             <td>
@@ -185,5 +186,5 @@ if(isset($_SESSION['username']) && $_SESSION['role']=="pengurus") header('locati
 </div>
 
 <?php
-include("template/foot.php")
+include("template/foot.php");
 ?>

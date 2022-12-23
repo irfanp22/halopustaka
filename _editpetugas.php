@@ -80,7 +80,7 @@ if (isset($_POST['editpetugas'])) {
 }
 ?>
 <div class="container">
-    <div class="card" style="margin-top: 100px;">
+    <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
             <h4 class="text-center">Edit Petugas</h4>
             <form action="dashboard.php?page=editpetugas" method="post" name="editpetugas" enctype="multipart/form-data">

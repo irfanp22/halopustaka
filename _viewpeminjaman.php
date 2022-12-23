@@ -48,7 +48,7 @@ if (isset($_GET['id_acc'])) {
 ?>
 
 <div class="container">
-    <div class="card" style="margin-top: 100px;">
+    <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
             <div class="row mb-3">
                 <div class="col-md-9">

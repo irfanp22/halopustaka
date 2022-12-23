@@ -34,7 +34,7 @@ if (isset($_POST['tambahmahasiswa'])) {
     }
 
     if (!empty($_FILES['pic']['name'])) {
-        $namafoto = $_POST['nim'] . "." . strtolower(end(explode('.', $_FILES["pic"]["name"])));
+        $namafoto = $nim . "." . strtolower(end(explode('.', $_FILES["pic"]["name"])));
         $lokasifoto = $_FILES['pic']['tmp_name'];
         $fulldir = "assets/img/anggota/" . $namafoto;
         $dir = "anggota/";
@@ -75,7 +75,7 @@ if (isset($_POST['tambahmahasiswa'])) {
 }
 ?>
 <div class="container">
-    <div class="card" style="margin-top: 100px;">
+    <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
             <h4 class="text-center">Pendaftaran Anggota Perpustakaan</h4>
             <form action="dashboard.php?page=tmahasiswa" method="post" name="tambahmahasiswa" enctype="multipart/form-data">

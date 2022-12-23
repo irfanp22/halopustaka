@@ -12,6 +12,7 @@ if(isset($_GET['id'])){
 }
 
 if (isset($_POST['editmahasiswa'])) {
+    $nimlama = $_SESSION['nim'];
     $nim = $_POST['nim'];
     $nama = $_POST['nama'];
     $email = $_POST['email'];
@@ -30,6 +31,17 @@ if (isset($_POST['editmahasiswa'])) {
             exit;
         }
     }
+    if($nimlama!=$nim){
+        $result = mysqli_query($koneksi, "SELECT nim FROM anggota WHERE nim = '$nim'");
+        if (mysqli_fetch_assoc($result)) {
+            echo "<script>
+                    swal('NIM Sudah Terdaftar!', '', 'error').then(function(){
+                        window.location.assign('dashboard.php?page=viewmahasiswa');
+                    })
+                  </script>";
+            exit;
+        }
+    }
 
     if (!empty($_FILES['pic']['name'])) {
         $namafoto = $_POST['nim'] . "." . strtolower(end(explode('.', $_FILES["pic"]["name"])));
@@ -38,8 +50,8 @@ if (isset($_POST['editmahasiswa'])) {
         $dir = "anggota/";
         $foto = $dir . $namafoto;
         if(!empty($password)){
-            $query = "UPDATE anggota SET nim='$nim', nama='$nama', password='$password', email='$email', no_hp='$nohp', alamat='$alamat', jenis_kelamin='$jk', pic='$foto' WHERE nim = '$nim'";
-        }else $query = "UPDATE anggota SET nim='$nim', nama='$nama', email='$email', no_hp='$nohp', alamat='$alamat', jenis_kelamin='$jk', pic='$foto' WHERE nim = '$nim'";
+            $query = "UPDATE anggota SET nim='$nim', nama='$nama', password='$password', email='$email', no_hp='$nohp', alamat='$alamat', jenis_kelamin='$jk', pic='$foto' WHERE nim = '$nimlama'";
+        }else $query = "UPDATE anggota SET nim='$nim', nama='$nama', email='$email', no_hp='$nohp', alamat='$alamat', jenis_kelamin='$jk', pic='$foto' WHERE nim = '$nimlama'";
         $sql = mysqli_query($koneksi, $query);
         if ($sql) {
             move_uploaded_file($lokasifoto, $fulldir);
@@ -59,8 +71,8 @@ if (isset($_POST['editmahasiswa'])) {
         }
     } else {
         if(!empty($password)){
-            $query = "UPDATE anggota SET nim='$nim', nama='$nama', password='$password', email='$email', no_hp='$nohp', alamat='$alamat', jenis_kelamin='$jk' WHERE nim = '$nim'";
-        }else $query = "UPDATE anggota SET nim='$nim', nama='$nama', email='$email', no_hp='$nohp', alamat='$alamat', jenis_kelamin='$jk' WHERE nim = '$nim'";
+            $query = "UPDATE anggota SET nim='$nim', nama='$nama', password='$password', email='$email', no_hp='$nohp', alamat='$alamat', jenis_kelamin='$jk' WHERE nim = '$nimlama'";
+        }else $query = "UPDATE anggota SET nim='$nim', nama='$nama', email='$email', no_hp='$nohp', alamat='$alamat', jenis_kelamin='$jk' WHERE nim = '$nimlama'";
         $sql = mysqli_query($koneksi, $query);
         if ($sql) {
             echo "<script>
@@ -81,7 +93,7 @@ if (isset($_POST['editmahasiswa'])) {
 }
 ?>
 <div class="container">
-    <div class="card" style="margin-top: 100px;">
+    <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
             <h4 class="text-center">Edit Data Mahasiswa</h4>
             <form action="dashboard.php?page=editmahasiswa" method="post" name="editmahasiswa" enctype="multipart/form-data">

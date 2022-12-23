@@ -87,78 +87,80 @@ if(isset($_GET['idrak'])){
     }
 }
 ?>
-<div class="row">
-    <div class="col-md-6">
-        <div class="card border-bottom-success shadow h-100 py-2">
-            <div class="row">
-                <h5 class="text-center col-sm-8">Rak</h5>
-                <div class="col-sm-4">
-                    <a href="#" data-toggle="modal" data-target="#rakModal" class="btn btn-primary">Tambah Rak</a>
+<div class="container">
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-md-6">
+            <div class="card border-bottom-success shadow h-100 py-2">
+                <div class="row">
+                    <h5 class="text-center col-sm-8">Rak</h5>
+                    <div class="col-sm-4">
+                        <a href="#" data-toggle="modal" data-target="#rakModal" class="btn btn-primary">Tambah Rak</a>
+                    </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <table id="table3" class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID Rak</th>
-                            <th>Nama Rak</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $sql = mysqli_query($koneksi, "SELECT * FROM rak");
-                        while ($rak = mysqli_fetch_array($sql)) {
-                        ?>
+                <div class="card-body">
+                    <table id="table3" class="table table-striped table-bordered">
+                        <thead>
                             <tr>
-                                <td><?php echo $rak["id_rak"] ?></td>
-                                <td><?php echo $rak["nama_rak"] ?></td>
-                                <td><a href="#" data-toggle="modal" data-target="#editRak" data-id="<?php echo $rak["id_rak"] ?>" data-nama="<?php echo $rak["nama_rak"] ?>" class="btn btn-warning btneditrak">Edit</a>
-                                    <a href="<?php echo $_SERVER['PHP_SELF'].'?page=viewrak&idrak='.$rak['id_rak'] ?>" class="btn btn-danger confirmAlert" id="btnhapusrak">Hapus</a>
-                                </td>
+                                <th>ID Rak</th>
+                                <th>Nama Rak</th>
+                                <th>Aksi</th>
                             </tr>
-                        <?php
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sql = mysqli_query($koneksi, "SELECT * FROM rak");
+                            while ($rak = mysqli_fetch_array($sql)) {
+                            ?>
+                                <tr>
+                                    <td><?php echo $rak["id_rak"] ?></td>
+                                    <td><?php echo $rak["nama_rak"] ?></td>
+                                    <td><a href="#" data-toggle="modal" data-target="#editRak" data-id="<?php echo $rak["id_rak"] ?>" data-nama="<?php echo $rak["nama_rak"] ?>" class="btn btn-warning btneditrak"><i class="fas fa-pen-to-square"></i></a>
+                                        <a href="<?php echo $_SERVER['PHP_SELF'].'?page=viewrak&idrak='.$rak['id_rak'] ?>" class="btn btn-danger confirmAlert" id="btnhapusrak"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card border-bottom-primary shadow h-100 py-2">
-            <div class="row">
-                <h5 class="text-center col-sm-8">Kategori</h5>
-                <div class="col-sm-4">
-                    <a href="#" data-toggle="modal" data-target="#kategoriModal" class="btn btn-primary">Tambah Kategori</a>
+        <div class="col-md-6">
+            <div class="card border-bottom-primary shadow h-100 py-2">
+                <div class="row">
+                    <h5 class="text-center col-sm-8">Kategori</h5>
+                    <div class="col-sm-4">
+                        <a href="#" data-toggle="modal" data-target="#kategoriModal" class="btn btn-primary">Tambah Kategori</a>
+                    </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <table id="table4" class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID Kategori</th>
-                            <th>Nama Kategori</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $sql = mysqli_query($koneksi, "SELECT * FROM kategori");
-                        while ($kategori = mysqli_fetch_array($sql)) {
-                        ?>
+                <div class="card-body">
+                    <table id="table4" class="table table-striped table-bordered">
+                        <thead>
                             <tr>
-                                <td><?php echo $kategori["id_kategori"] ?></td>
-                                <td><?php echo $kategori["nama_kategori"] ?></td>
-                                <td><a href="#" data-toggle="modal" data-target="#editKategori" data-id="<?php echo $kategori["id_kategori"] ?>" data-nama="<?php echo $kategori["nama_kategori"] ?>" class="btn btn-warning btneditkateg">Edit</a>
-                                    <a href="<?php echo $_SERVER['PHP_SELF'].'?page=viewrak&idkategori='.$kategori['id_kategori'] ?>" class="btn btn-danger confirmAlert" id="btnhapuskateg">Hapus</a>
-                                </td>
+                                <th>ID Kategori</th>
+                                <th>Nama Kategori</th>
+                                <th>Aksi</th>
                             </tr>
-                        <?php
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sql = mysqli_query($koneksi, "SELECT * FROM kategori");
+                            while ($kategori = mysqli_fetch_array($sql)) {
+                            ?>
+                                <tr>
+                                    <td><?php echo $kategori["id_kategori"] ?></td>
+                                    <td><?php echo $kategori["nama_kategori"] ?></td>
+                                    <td><a href="#" data-toggle="modal" data-target="#editKategori" data-id="<?php echo $kategori["id_kategori"] ?>" data-nama="<?php echo $kategori["nama_kategori"] ?>" class="btn btn-warning btneditkateg"><i class="fas fa-pen-to-square"></i></a>
+                                        <a href="<?php echo $_SERVER['PHP_SELF'].'?page=viewrak&idkategori='.$kategori['id_kategori'] ?>" class="btn btn-danger confirmAlert" id="btnhapuskateg"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

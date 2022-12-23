@@ -1,4 +1,4 @@
-    <div class="card border-dark mb-3 w-100">
+    <div class="card mb-3 w-100">
         <div class="card-header text-center font-weight-bold">Halo Pustaka</div>
         <div class="card-body text-dark">
             <p class="card-text text-center">Copyright &copy; 2022 | Sistem Informasi Perpustakaan Halo Pustaka</p>

@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
 ?>
 
 <div class="container">
-    <div class="card" style="margin-top: 100px;">
+    <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
             <h4 class="text-center">Daftar Buku</h4>
             <table id="table2" class="table table-striped table-bordered">
@@ -46,7 +46,8 @@ if (isset($_GET['id'])) {
                             <td><?php echo $data["nama_kategori"] ?></td>
                             <td><?php echo $data["stok"] ?></td>
                             <?php
-                            $sedia = mysqli_fetch_array(mysqli_query($koneksi, "SELECT COUNT(id_buku) AS sedia FROM peminjaman WHERE status != 'done'"));
+                            $id=$data["id_buku"];
+                            $sedia = mysqli_fetch_array(mysqli_query($koneksi, "SELECT COUNT(id_buku) AS sedia FROM peminjaman WHERE id_buku='$id' AND status != 'done'"));
                             ?>
                             <td><?php echo $data['stok'] - $sedia['sedia']  ?></td>
                             <td><a href="#" data-toggle="modal" data-target="#detailModal" data-id="<?php echo $data['id_buku'] ?>" class="btn btn-success btndetailbuku"><i class="fas fa-circle-info"></i></a>

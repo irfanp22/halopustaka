@@ -1,3 +1,15 @@
+    <?php
+    if($title=="Daftar Buku" || $title=="Profil"){
+        ?>
+        <div class="card mb-3 w-100 mt-4">
+            <div class="card-header text-center font-weight-bold">Halo Pustaka</div>
+            <div class="card-body text-dark">
+                <p class="card-text text-center">Copyright &copy; 2022 | Sistem Informasi Perpustakaan Halo Pustaka</p>
+            </div>
+        </div>
+        <?php
+    }
+    ?>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 

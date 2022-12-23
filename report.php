@@ -20,7 +20,7 @@ if(isset($_POST['thnbtn'])){
   $denda = mysqli_fetch_array(mysqli_query($koneksi, "SELECT SUM(denda) AS denda FROM peminjaman WHERE MONTH(tanggal_kembali) = $bulan AND YEAR(tanggal_kembali) = $tahun AND status = 'done'"));
 }
 ?>
-<div class="row">
+<div class="row" style="margin-bottom: 20px;">
     <div class="col-xl-12 mt-2 mb-2">
         <form name="tahun" action="dashboard.php" method="post" class="form-inline my-2 my-lg-0" id="repbln">
             <div class="form-group mr-4">
@@ -133,7 +133,7 @@ if(isset($_POST['thnbtn'])){
         <div class="card-body">
           <div class="row align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Rata-Rata Waktu Pengembalian</div>
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Rata-Rata Waktu Pengembalian</div>
               <?php
               if(empty(mysqli_fetch_array($tanggal2))){
                 $total = 0;
@@ -151,7 +151,7 @@ if(isset($_POST['thnbtn'])){
               <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo number_format($total); ?> Hari</div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-list-alt fa-2x text-gray-300 ml-1"></i>
+              <i class="fas fa-clock fa-2x text-gray-300 ml-1"></i>
             </div>
           </div>
         </div>
@@ -161,16 +161,16 @@ if(isset($_POST['thnbtn'])){
 
   <div class="col-xl-4 col-md-6 mb-4">
     <a href="?page=viewpeminjaman">
-      <div class="card border-left-warning shadow h-100 py-2 zoom">
+      <div class="card border-left-danger shadow h-100 py-2 zoom">
         <div class="card-body">
           <div class="row align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Jumlah Denda</div>
+              <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Jumlah Denda</div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">Rp <?php echo number_format($denda['denda']); ?></div>
               <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-list-alt fa-2x text-gray-300 ml-1"></i>
+              <i class="fas fa-rupiah-sign fa-2x text-gray-300 ml-1"></i>
             </div>
           </div>
         </div>
@@ -179,7 +179,10 @@ if(isset($_POST['thnbtn'])){
   </div>
 </div>
 
-<div class="container">
-  <h5 class="text-center">Jumlah Peminjaman Buku</h5>
+<div class="container" style="margin-bottom: 20px;">
+  <h5 class="text-center">Peminjaman Buku Tahun <?php
+    if(empty($_POST['thnbtn'])) echo $skrg['thn'];
+    elseif(isset($_POST['thnbtn'])) echo $tahun;
+  ?></h5>
   <canvas id="report"></canvas>
 </div>

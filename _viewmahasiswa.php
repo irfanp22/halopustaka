@@ -17,7 +17,7 @@ if (isset($_GET['id'])) {
 ?>
 
 <div class="container">
-    <div class="card" style="margin-top: 100px;">
+    <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
             <h4 class="text-center">Daftar Mahasiswa</h4>
             <table id="table5" class="table table-striped table-bordered">

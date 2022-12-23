@@ -24,7 +24,7 @@ if (isset($_POST['tambahpetugas'])) {
     }
 
     if (!empty($_FILES['pic']['name'])) {
-        $query = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM pengurus ORDER BY id_pengurus DESC LIMIT 1"));
+        $query = mysqli_fetch_array(mysqli_query($koneksi, "SELECT id_pengurus FROM pengurus ORDER BY id_pengurus DESC LIMIT 1"));
         $idprev = $query['id_pengurus'];
         $awl = substr($idprev, 0, 2);
         $no = intval(end(explode('G', $idprev, 3))) + 1;
@@ -70,7 +70,7 @@ if (isset($_POST['tambahpetugas'])) {
 }
 ?>
 <div class="container">
-    <div class="card" style="margin-top: 100px;">
+    <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
             <h4 class="text-center">Tambah Petugas Perpustakaan</h4>
             <form action="dashboard.php?page=tpetugas" method="post" name="tambahpetugas" enctype="multipart/form-data">
