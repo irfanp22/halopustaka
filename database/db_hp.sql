@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2022 at 04:18 AM
+-- Generation Time: Dec 24, 2022 at 02:23 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -89,8 +89,11 @@ CREATE TABLE `anggota` (
 --
 
 INSERT INTO `anggota` (`nim`, `nama`, `password`, `email`, `no_hp`, `alamat`, `jenis_kelamin`, `pic`) VALUES
-('H1D021043', 'Irfan Priatna', '$2y$10$8lQQu/ehbbIYn7XUvDhlbOp6Fc7SxCM2QqnTq2uiJuj1a32MNbz76', 'irfan.priatna@mhs.unsoed.ac.id', '0895375115609', 'Ciamis', 'l', 'anggota/h1d021043.jpg'),
-('H1D021111', 'djoko sasana', '$2y$10$/9gbCNaJR1Xx4wzZ7kh4T.k6YKUdWqpz.pzhC2i53X.2Hg0/qcSvu', 'irfanpriatna22@gmail.com', '081223224225', 'Jalan In Aja No.333', 'l', 'anggota/H1D021111.jpg');
+('H1D021005', 'Alifa Iftithah Z', '$2y$10$d5wvOZ53kSBOz5SPPJjcHOFJrd0uB1DARrJc72vI3vTgxsiw.JOTG', '', '', '', 'p', 'anggota/mhs.png'),
+('H1D021008', 'Mila Amelia', '$2y$10$Vk1giW19HR5iX2FOdejuTetIbZ9akfd7y1ZUVaD/rG5gFc1zMG6fK', '', '', '', 'p', 'anggota/mhs.png'),
+('H1D021021', 'Annisa Raihan D', '$2y$10$aU30sFKOhVj/fR6PEz9.x.xmrYfZD72tKLQ9YfxBoAHW/4Z8hF1.C', '', '', '', 'p', 'anggota/mhs.png'),
+('H1D021043', 'Irfan Priatna', '$2y$10$jVJuRnPvr6/UjWGEuZI94.Nk.mvnOPkmDg1tD4hA8bx4s7XyfolnG', 'irfan.priatna@mhs.unsoed.ac.id', '0895375115609', 'Ciamis', 'l', 'anggota/h1d021043.jpg'),
+('H1D021111', 'djoko sasana', '$2y$10$CrBRVpGSM7V5Z2lkTBo5J.z4iJbHvkTfUWXjrK.kkXjws/yHK1E6i', 'irfanpriatna22@gmail.com', '081223224225', 'Jalan In Aja No.333', 'l', 'anggota/H1D021111.png');
 
 -- --------------------------------------------------------
 
@@ -117,7 +120,16 @@ CREATE TABLE `buku` (
 --
 
 INSERT INTO `buku` (`id_buku`, `judul`, `id_kategori`, `id_rak`, `isbn`, `pengarang`, `penerbit`, `tahun_terbit`, `stok`, `keterangan`, `pic`) VALUES
-('BK001', 'Membuat berbagai DVD-Video dengan Ulead Video Studio 9', 'KT002', 'NF001', '979-20-8027-9', 'Ian Chandra K', 'Elex Media Komputindo', 2006, 2, 'vii, 252 hlm. : ilus. ; 21 cm.', 'buku/BK001.jpg');
+('BK001', 'Membuat berbagai DVD-Video dengan Ulead Video Studio 9', 'KT002', 'NF001', '979-20-8027-9', 'Ian Chandra K', 'Elex Media Komputindo', 2006, 2, 'vii, 252 hlm. : ilus. ; 21 cm.', 'buku/BK001.jpg'),
+('BK002', 'Manusia stoik : sebuah obat depresi dan penawar ekspektasi yang terlalu tinggi', 'KT002', 'NF001', '978-623-400-185-3', 'Dewi Indra P. (penulis) Herman Adamson (penyunting)', 'Psikologi Corner', 2022, 5, 'xxv, 230 halaman : ilustrasi 20 cm', 'buku/BK002.jpg'),
+('BK003', 'Suluh-suluh revolusi', 'KT001', 'NV001', '978-623-95424-7-4', 'Ridjaluddin Shar (penulis) Damhuri Muhammad (editor)', 'Beranda', 2022, 4, 'x, 458 halaman : ilustrasi ; 23 cm', 'buku/BK003.jpg'),
+('BK004', 'Algoritma dan pemrograman dalam bahasa Java', 'KT002', 'NF001', '978-979-756-576-3', 'F.X. Wisnu Yudo Untoro', 'Graha Ilmu', 2010, 1, 'xv, 278 hlm. ; 22 cm.', 'buku/buku.jpg'),
+('BK005', 'Modul Pembelajaran Pemrograman Berorientasi Objek : dengan bahasa pemrograman C++, PHP, dan Java', 'KT002', 'NF001', '978-602-8759-07-6', 'Rosa A.S., M. Shalahuddin', 'Modula', 2016, 3, 'xii, 290 halaman : ilustrasi ; 23 cm', 'buku/buku.jpg'),
+('BK006', 'Dasar pemrograman web dengan PHP', 'KT002', 'NF001', '978-602-453-396-0', 'Canggih Ajika Pamungkas', 'Deepublish', 2017, 4, 'x, 92 halaman : ilustrasi ; 20 cm', 'buku/BK006.jpg'),
+('BK007', 'Esok bersamamu', 'KT003', 'FK001', '978-623-306-432-3', 'Artsymiia. 1992- (penulis) Lulu Latifah (editor)', 'AE Publishing', 2021, 6, 'ii, 322 halaman ; 20 cm', 'buku/buku.jpg'),
+('BK008', 'Hujan tanpa suara : ketika aku merindukanmu, dengan kerinduan yang meremas-remas kalbu', 'KT001', 'NV001', '978-623-6439-96-8', 'Nailin RA (penulis) Tim CMG (editor)', 'Catur Media Gemilang', 2022, 3, '204 hal Ilustrasi 2022', 'buku/BK008.jpg'),
+('BK009', 'Juru kunci makam', 'KT003', 'FK001', '-', 'Sinta Yudisia, 1974- (pengarang) Ayu Wulan (penyunting bahasa)', 'Indiva Media Kreasi', 2020, 2, '133 halaman : ilustrasi ; 19 cm', 'buku/buku.jpg'),
+('BK010', 'Kartun Kalkulus', 'KT002', 'NF001', '978-602-481-620-9', 'Gonick, Larry (pengarang) Mharta Adji Wardana (penerjemah) Andya Primanda (penyunting)', 'Kepustakaan Populer Gramedia', 2021, 3, 'Xii, 243 halaman : ilustrasi : 23 cm', 'buku/BK010.jpg');
 
 --
 -- Triggers `buku`
@@ -156,7 +168,8 @@ CREATE TABLE `kategori` (
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 ('KT001', 'Novel'),
-('KT002', 'Non-Fiksi');
+('KT002', 'Non-Fiksi'),
+('KT003', 'Fiksi');
 
 --
 -- Triggers `kategori`
@@ -188,8 +201,8 @@ CREATE TABLE `peminjaman` (
   `id_peminjaman` char(7) NOT NULL,
   `id_buku` char(5) NOT NULL,
   `nim` char(9) NOT NULL,
-  `tanggal_pinjam` date NOT NULL,
-  `tanggal_kembali` date DEFAULT NULL,
+  `tanggal_pinjam` datetime NOT NULL,
+  `tanggal_kembali` datetime DEFAULT NULL,
   `denda` int(5) NOT NULL DEFAULT 0,
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -199,8 +212,25 @@ CREATE TABLE `peminjaman` (
 --
 
 INSERT INTO `peminjaman` (`id_peminjaman`, `id_buku`, `nim`, `tanggal_pinjam`, `tanggal_kembali`, `denda`, `status`) VALUES
-('PJ00002', 'BK001', 'H1D021111', '2022-11-26', '2022-11-27', 40000, 'done'),
-('PJ00003', 'BK001', 'H1D021043', '2022-11-27', NULL, 0, 'process');
+('PJ00002', 'BK001', 'H1D021111', '2022-10-02 12:44:33', '2022-10-13 14:05:53', 34000, 'done'),
+('PJ00003', 'BK004', 'H1D021005', '2022-10-09 08:45:27', '2022-10-18 10:06:22', 2000, 'done'),
+('PJ00004', 'BK009', 'H1D021043', '2022-10-15 07:15:45', '2022-10-16 08:56:54', 0, 'done'),
+('PJ00005', 'BK003', 'H1D021021', '2022-10-21 12:28:56', '2022-10-29 13:44:21', 1000, 'done'),
+('PJ00006', 'BK002', 'H1D021008', '2022-10-28 16:02:55', '2022-10-31 17:50:02', 0, 'done'),
+('PJ00007', 'BK001', 'H1D021043', '2022-11-02 17:51:59', '2022-11-04 14:52:10', 0, 'done'),
+('PJ00008', 'BK004', 'H1D021005', '2022-11-04 08:13:08', '2022-11-09 12:32:17', 0, 'done'),
+('PJ00009', 'BK002', 'H1D021043', '2022-11-12 10:49:41', '2022-11-24 11:52:25', 5000, 'done'),
+('PJ00010', 'BK005', 'H1D021008', '2022-11-14 14:50:27', '2022-11-22 09:42:32', 0, 'done'),
+('PJ00011', 'BK008', 'H1D021021', '2022-11-24 13:20:58', '2022-11-29 17:52:39', 0, 'done'),
+('PJ00012', 'BK006', 'H1D021005', '2022-11-26 09:51:12', '2022-12-09 10:22:47', 6000, 'done'),
+('PJ00013', 'BK007', 'H1D021008', '2022-11-26 10:21:24', '2022-12-04 12:52:55', 1000, 'done'),
+('PJ00014', 'BK009', 'H1D021043', '2022-11-28 15:51:36', '2022-12-02 10:53:03', 0, 'done'),
+('PJ00015', 'BK010', 'H1D021021', '2022-11-30 11:31:47', '2022-12-12 08:53:11', 4000, 'done'),
+('PJ00016', 'BK004', 'H1D021021', '2022-12-05 09:31:38', '2022-12-12 12:34:46', 0, 'done'),
+('PJ00017', 'BK007', 'H1D021005', '2022-12-07 11:52:28', '2022-12-16 09:24:54', 1000, 'done'),
+('PJ00018', 'BK008', 'H1D021008', '2022-12-14 14:33:55', '2022-12-24 17:35:02', 3000, 'done'),
+('PJ00019', 'BK010', 'H1D021005', '2022-12-22 15:33:49', NULL, 0, 'process'),
+('PJ00020', 'BK006', 'H1D021021', '2022-12-24 09:26:14', NULL, 0, 'process');
 
 --
 -- Triggers `peminjaman`
@@ -241,8 +271,9 @@ CREATE TABLE `pengurus` (
 --
 
 INSERT INTO `pengurus` (`id_pengurus`, `nama`, `password`, `level`, `pic`) VALUES
-('PG001', 'Prijatno', '$2y$10$.DJ3TLz8F7kMMQjEm1PWtuK13de2z70AovDbL4ua2TdwcrZ2nAw2K', 'owner', 'pengurus/admin.png'),
-('PG002', 'Djoko', '$2y$10$SDMNcyqzYPTJcmIqagocoeDKudSj0BYW9LXIGID2uhKcZIPiQSAJq', 'petugas', 'pengurus/admin.png');
+('PG001', 'Prijatno', '$2y$10$Ulu44Z/XAIlRR88qjwt4UOKbC1yhz.K49lgcbJdD4edY7YOFJ4y8G', 'owner', 'pengurus/admin.png'),
+('PG002', 'Djoko', '$2y$10$a/yQZA37NeI4yQ54dQ0qrObAskTflk2Qesv17OSJXJUVgyLwIzpou', 'petugas', 'pengurus/admin.png'),
+('PG003', 'zambo', '$2y$10$UHjWq1MelyrqOAFBQuMs5OsZbug3AdDwE7voTNGaOMsW5PFWQvqcu', 'owner', 'pengurus/PG003.jpg');
 
 --
 -- Triggers `pengurus`
@@ -280,6 +311,7 @@ CREATE TABLE `rak` (
 --
 
 INSERT INTO `rak` (`id_rak`, `nama_rak`) VALUES
+('FK001', 'Fiksi 1-100'),
 ('NF001', 'NonFiksi 1-100'),
 ('NV001', 'Novel 1-100');
 

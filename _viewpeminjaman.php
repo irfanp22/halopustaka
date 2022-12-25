@@ -16,6 +16,22 @@ if (isset($_POST['tambahpeminjaman'])) {
                 </script>";
 }
 
+if(isset($_POST['editpeminjaman'])){
+    $id = $_POST['id_peminjaman'];
+    $id_buku = $_POST['id_buku'];
+    $nim = $_POST['nim'];
+    $tgl = date('Y-m-d H:i:s');
+    $query = "UPDATE peminjaman SET id_buku = '$id_buku', nim = '$nim', tanggal_pinjam = '$tgl' WHERE id_peminjaman = '$id'";
+    $sql = mysqli_query($koneksi, $query);
+    if ($sql) {
+        echo "<script>
+                swal('Data Peminjaman Berhasil Diedit!', '', 'success')
+                </script>";
+    } else echo "<script>
+                swal('Data Peminjaman Gagal Diedit!', '', 'error');
+                </script>";
+}
+
 if (isset($_GET['id_del'])) {
     $id = htmlspecialchars($_GET["id_del"]);
     $sql = "DELETE FROM peminjaman WHERE id_peminjaman='$id'";
@@ -248,9 +264,10 @@ if (isset($_GET['id_acc'])) {
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="dashboard.php?page=viewrak" method="post" name="erak">
+            <form action="dashboard.php?page=viewpeminjaman" method="post" name="epeminjaman">
                 <div class="modal-body">
                     <div class="row">
+                        <input type="hidden" name="id_peminjaman" class="id_peminjaman">
                         <div class="col-sm-4">
                             <h6 class="mb-0">Buku</h6>
                         </div>

@@ -63,11 +63,15 @@ if(isset($_GET['idkategori'])){
     $sql = mysqli_query($koneksi, "DELETE FROM kategori WHERE id_kategori='$id'");
     if($sql){
         echo "<script>
-            swal('Data kategori berhasil dihapus!', '', 'success');
+            swal('Data kategori berhasil dihapus!', '', 'success').then(function(){
+                window.location.assign('?page=viewrak');
+            });
         </script>";
     } else {
         echo "<script>
-            swal('Data kategori gagal dihapus!', '', 'error');
+            swal('Data kategori gagal dihapus!', '', 'error').then(function(){
+                window.location.assign('?page=viewrak');
+            });
         </script>";
     }
 }
@@ -78,11 +82,15 @@ if(isset($_GET['idrak'])){
     $sql = mysqli_query($koneksi, "DELETE FROM rak WHERE id_rak='$id'");
     if($sql){
         echo "<script>
-            swal('Data rak berhasil dihapus!', '', 'success');
+            swal('Data rak berhasil dihapus!', '', 'success').then(function(){
+                window.location.assign('?page=viewrak');
+            });
         </script>";
     } else {
         echo "<script>
-            swal('Data rak gagal dihapus!', '', 'error');
+            swal('Data rak gagal dihapus!', '', 'error').then(function(){
+                window.location.assign('?page=viewrak');
+            });
         </script>";
     }
 }

@@ -343,6 +343,7 @@
 
         $('.btneditpeminjaman').click(function() {
             var id_peminjaman = $(this).data('id');
+            $('.id_peminjaman').val(id_peminjaman);
             $.ajax({
                 url: "detaileditpeminjaman.php",
                 method: "POST",

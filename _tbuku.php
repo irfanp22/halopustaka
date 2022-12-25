@@ -5,6 +5,8 @@ if (isset($_SESSION['role'])) {
     }
 }
 
+$tahun = mysqli_fetch_array(mysqli_query($koneksi, "SELECT YEAR(current_date()) AS thn"));
+
 if (isset($_POST['tambahkategori'])) {
     $nama = $_POST['namakategori'];
     $sql = mysqli_query($koneksi, "INSERT INTO kategori(nama_kategori) VALUES('$nama')");
@@ -44,6 +46,22 @@ if (isset($_POST['tambahbuku'])) {
     $keterangan = $_POST['keterangan'];
     $kategori = $_POST['kategori'];
     $rak = $_POST['rak'];
+    if($stok < 0){
+        echo "<script>
+                    swal('Stok tidak boleh minus!', '', 'error').then(function(){
+                        window.location.assign('dashboard.php?page=tbuku');
+                    })
+                  </script>";
+            exit;
+    }
+    if($thnterbit < 1900 || $thnterbit >=$tahun['thn']){
+        echo "<script>
+                    swal('Masukan tahun terbit yang sesuai!', '', 'error').then(function(){
+                        window.location.assign('dashboard.php?page=tbuku');
+                    })
+                  </script>";
+            exit;
+    }
 
     if (!empty($_FILES['pic']['name'])) {
         if($query = mysqli_fetch_array(mysqli_query($koneksi, "SELECT id_buku FROM buku ORDER BY id_buku DESC LIMIT 1"))){
@@ -132,7 +150,7 @@ if (isset($_POST['tambahbuku'])) {
                         <h6 class="mb-0">Tahun Terbit</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="number" min="1900" max="2022" name="thnterbit" id="thnterbit" class="form-control" placeholder="Masukan Tahun Terbit" required>
+                        <input type="number" min="1900" max="<?php echo $tahun['thn'] ?>" name="thnterbit" id="thnterbit" class="form-control" placeholder="Masukan Tahun Terbit" required>
                     </div>
                 </div>
                 <hr>

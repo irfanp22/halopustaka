@@ -4,13 +4,9 @@ if (isset($_SESSION['role'])) {
         header("Location: index.php");
     }
 }
-$hal = $_GET['page'];
-if ($hal == "editbuku") {
-    $tabel_masuk = "buku";
-}
 $id = $_GET['id'];
 $data = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM buku WHERE id_buku = '$id'"));
-
+$tahun = mysqli_fetch_array(mysqli_query($koneksi, "SELECT YEAR(current_date()) AS thn"));
 
 if (isset($_POST['editbuku'])) {
     $id = $_GET['id'];
@@ -23,6 +19,24 @@ if (isset($_POST['editbuku'])) {
     $keterangan = $_POST['keterangan'];
     $kategori = $_POST['kategori'];
     $rak = $_POST['rak'];
+    $onprocess = mysqli_fetch_array(mysqli_query($koneksi, "SELECT COUNT(id_buku) AS stok FROM peminjaman WHERE id_buku = '$id' AND status !='done'"));
+    $cek = $stok - $onprocess['stok'];
+    if($cek < 0){
+        echo "<script>
+                    swal('Stok tidak boleh minus!', '', 'error').then(function(){
+                        window.location.assign('dashboard.php?page=viewbuku');
+                    })
+                  </script>";
+            exit;
+    }
+    if($thnterbit < 1900 || $thnterbit >=$tahun['thn']){
+        echo "<script>
+                    swal('Masukan tahun terbit yang sesuai!', '', 'error').then(function(){
+                        window.location.assign('dashboard.php?page=viewbuku');
+                    })
+                  </script>";
+            exit;
+    }
 
     if (!empty($_FILES['pic']['name'])) {
         $namafoto = $id . "." . strtolower(end(explode('.', $_FILES["pic"]["name"])));
@@ -30,7 +44,7 @@ if (isset($_POST['editbuku'])) {
         $fulldir = "assets/img/buku/" . $namafoto;
         $dir = "buku/";
         $foto = $dir . $namafoto;
-        $query = "UPDATE $tabel_masuk SET judul = '$judul', isbn = '$isbn', pengarang = '$pengarang', penerbit = '$penerbit', tahun_terbit = '$thnterbit', stok = '$stok', keterangan = '$keterangan', id_kategori = '$kategori', id_rak = '$rak', pic = '$foto' WHERE id_buku = '$id'";
+        $query = "UPDATE buku SET judul = '$judul', isbn = '$isbn', pengarang = '$pengarang', penerbit = '$penerbit', tahun_terbit = '$thnterbit', stok = '$stok', keterangan = '$keterangan', id_kategori = '$kategori', id_rak = '$rak', pic = '$foto' WHERE id_buku = '$id'";
         $sql = mysqli_query($koneksi, $query);
         if ($sql) {
             move_uploaded_file($lokasifoto, $fulldir);
@@ -43,7 +57,7 @@ if (isset($_POST['editbuku'])) {
                 swal('Data Buku Gagal Diedit!', '', 'error');
                 </script>";
     } else {
-        $query = "UPDATE $tabel_masuk SET judul = '$judul', isbn = '$isbn', pengarang = '$pengarang', penerbit = '$penerbit', tahun_terbit = '$thnterbit', stok = '$stok', keterangan = '$keterangan', id_kategori = '$kategori', id_rak = '$rak' WHERE id_buku = '$id'";
+        $query = "UPDATE buku SET judul = '$judul', isbn = '$isbn', pengarang = '$pengarang', penerbit = '$penerbit', tahun_terbit = '$thnterbit', stok = '$stok', keterangan = '$keterangan', id_kategori = '$kategori', id_rak = '$rak' WHERE id_buku = '$id'";
         $sql = mysqli_query($koneksi, $query);
         if ($sql) {
             echo "<script>
@@ -103,7 +117,7 @@ if (isset($_POST['editbuku'])) {
                         <h6 class="mb-0">Tahun Terbit</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="number" min="1900" max="2022" name="thnterbit" id="thnterbit" class="form-control" placeholder="Masukan Tahun Terbit"  value="<?php echo $data['tahun_terbit'] ?>" required>
+                        <input type="number" min="1900" max="<?php echo $tahun['thn'] ?>" name="thnterbit" id="thnterbit" class="form-control" placeholder="Masukan Tahun Terbit"  value="<?php echo $data['tahun_terbit'] ?>" required>
                     </div>
                 </div>
                 <hr>
