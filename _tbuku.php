@@ -54,7 +54,7 @@ if (isset($_POST['tambahbuku'])) {
                   </script>";
             exit;
     }
-    if($thnterbit < 1900 || $thnterbit >=$tahun['thn']){
+    if($thnterbit < 1900 || $thnterbit >$tahun['thn']){
         echo "<script>
                     swal('Masukan tahun terbit yang sesuai!', '', 'error').then(function(){
                         window.location.assign('dashboard.php?page=tbuku');

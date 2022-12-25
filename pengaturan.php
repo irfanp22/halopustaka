@@ -24,6 +24,7 @@ if(isset($_POST['edit'])){
         echo '<script> swal("Password salah! Data gagal diedit!", "", "error").then(function(){
             window.location.assign("pengaturan.php")
             }) </script>';
+        exit;
     }
     if (($_POST['passwordbaru'] !== $_POST['passwordbarukonf'])){
         echo '<script> swal("Password baru berbeda! Data gagal diedit!", "", "error").then(function(){
