@@ -45,7 +45,7 @@ if(isset($_SESSION['username']) && $_SESSION['role']=="pengurus") header('locati
                             ?>
                             <td><?php echo $data['stok']-$sedia['sedia']  ?></td>
                             <td>
-                            <a href="#" data-toggle="modal" data-target="#detailModal" data-id="<?php echo $data['id_buku'] ?>" class="btn btn-success btndetailbuku"><i class="fas fa-circle-info"></i></a>
+                            <button type="buttton" class="btn btn-success btndetailbuku" data-bs-toggle="modal" data-bs-target="#detailModal" data-id="<?php echo $data['id_buku'] ?>"><i class="fas fa-circle-info"></i></button>
                             <?php if(isset($_SESSION['username'])){
                                 $buku = $data['id'];
                                 echo '<a href="#" class="btn btn-primary confirmPinjam" data-id_buku="'.$data["id_buku"].'" data-nim="'.$_SESSION['username'].'" data-judul="'.$data['judul'].'" data-sedia="'.($data['stok']-$sedia['sedia']).'" id="btnbook">Pinjam</a>';
@@ -66,9 +66,7 @@ if(isset($_SESSION['username']) && $_SESSION['role']=="pengurus") header('locati
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Detail Buku</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row ">
@@ -179,7 +177,7 @@ if(isset($_SESSION['username']) && $_SESSION['role']=="pengurus") header('locati
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Tutup</button>
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>

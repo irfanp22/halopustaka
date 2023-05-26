@@ -1,15 +1,21 @@
     <?php
-    if($title=="Daftar Buku" || $title=="Profil"){
-        ?>
+    if ($title == "Daftar Buku" || $title == "Profil") {
+    ?>
         <div class="card mb-3 w-100 mt-4">
             <div class="card-header text-center font-weight-bold">Halo Pustaka</div>
             <div class="card-body text-dark">
                 <p class="card-text text-center">Copyright &copy; 2022 | Sistem Informasi Perpustakaan Halo Pustaka</p>
             </div>
         </div>
-        <?php
+    <?php
     }
     ?>
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Template Main JS File -->
+    <script src="js/main.js"></script>
+    
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 
@@ -106,28 +112,28 @@
                     "tahun": thn
                 },
                 dataType: "JSON",
-                success: function(data){
+                success: function(data) {
                     var denda = [data.denda1, data.denda2, data.denda3, data.denda4, data.denda5, data.denda6, data.denda7, data.denda8, data.denda9, data.denda10, data.denda11, data.denda12];
                     var pinjam = [data.bulan1, data.bulan2, data.bulan3, data.bulan4, data.bulan5, data.bulan6, data.bulan7, data.bulan8, data.bulan9, data.bulan10, data.bulan11, data.bulan12];
-                    for(var i=0; i<12; i++){
-                        if(denda[i]==null) denda[i]=0;
+                    for (var i = 0; i < 12; i++) {
+                        if (denda[i] == null) denda[i] = 0;
                     }
                     var chartdata = {
-                            datasets: [{
-                                data: pinjam,
-                                label: 'Peminjaman Buku',
-        
-                                // This binds the dataset to the left y axis
-                                yAxisID: 'left-y-axis'
-                            }, {
-                                data: denda,
-                                label: 'Denda',
-        
-                                // This binds the dataset to the right y axis
-                                yAxisID: 'right-y-axis'
-                            }],
-                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des']
-                        }
+                        datasets: [{
+                            data: pinjam,
+                            label: 'Peminjaman Buku',
+
+                            // This binds the dataset to the left y axis
+                            yAxisID: 'left-y-axis'
+                        }, {
+                            data: denda,
+                            label: 'Denda',
+
+                            // This binds the dataset to the right y axis
+                            yAxisID: 'right-y-axis'
+                        }],
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des']
+                    }
                     const repchart = document.getElementById('report');
                     const myChart = new Chart(repchart, {
                         type: 'line',
@@ -152,7 +158,7 @@
                         }
                     });
                 },
-                error: function(data){
+                error: function(data) {
                     console.log("ERROR".concat(data));
                 }
             })

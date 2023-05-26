@@ -1,51 +1,52 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="index.php"><i class="fas fa-solid fa-book-open"></i></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<!-- ======= Top Bar ======= -->
+<section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+            <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
+            <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+        </div>
+    </div>
+</section>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="navbar-nav mr-auto">
-                <div class="nav navbar-nav navbar-left">
-                    <div class="nav-item active">
-                        <a class="nav-link" href="./index.php">Home <span class="sr-only">(current)</span></a>
-                    </div>
-                    <div class="nav-item">
-                        <a class="nav-link" href="./buku.php">Lihat Buku</a>
-                    </div>
-                </div>
-                <div class="navbar-form navbar-right">
-                    <div class="nav-item navbar-right dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+<header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <h1 class="logo"><a href="index.php"><i class="fas fa-solid fa-book-open"></i></a></h1>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto active" href="./index.php">Home</a></li>
+                <li><a class="nav-link scrollto" href="./buku.php">Lihat Buku</a></li>
+                <li class="dropdown"><a href="#"><span>
                             <?php
                             $nama = $_SESSION['nama'];
                             if (!isset($_SESSION['username'])) {
                                 echo 'Masuk
-                                </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="masuk.php?sebagai=pengurus">Sebagai Admin</a>
-                                    <a class="dropdown-item" href="masuk.php?sebagai=anggota">Sebagai Mahasiswa</a>
-                                </div>';
+                </span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                <li><a href="masuk.php?sebagai=pengurus">Sebagai Admin</a></li>
+                <li><a href="masuk.php?sebagai=anggota">Sebagai Mahasiswa</a></li>
+                </ul>';
                             } else {
-                                echo $nama;
-                                echo '</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="profil.php">Profile</a>
-                                    <a class="dropdown-item" href="pengaturan.php">Pengaturan</a>
-                                    <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="keluar.php">Logout</a>
-                                </div>';
+                                echo $nama .
+                                    '</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                    <li><a href="profil.php">Profile</a></li>
+                    <li><a href="pengaturan.php">Pengaturan</a></li>
+                    <div class="dropdown-divider"></div>
+                    <li><a href="keluar.php">Logout</a></li>
+                    </ul>';
                             }
                             ?>
-                    </div>
-                </div>
-
-            </div>
-            <?php if ($title != "Daftar Buku") echo '<form name="search" action="buku.php" method="post" class="form-group form-inline my-2 my-lg-0">
+                </li>
+                <li><?php if ($title != "Daftar Buku") echo '<form name="search" action="buku.php" method="post" class="form-group form-inline my-2 my-lg-0">
                 <input class="form-control mr-lg-2" name="searchkey" type="text" placeholder="Search" aria-label="Search">
+                </li><li>
                 <button class="btn btn-outline-success my-2 my-sm-0 col-lg-0" name="searchbtn" type="submit" value="Search">Search</button>
-            </form>' ?>
-        </div>
+            </form>' ?></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
     </div>
-</nav>
+</header><!-- End Header -->
