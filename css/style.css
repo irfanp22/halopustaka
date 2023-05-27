@@ -1,19 +1,23 @@
 .ukur {
-  height: 100vh!important;
-  object-fit: cover!important;
-  object-position: center!important;
+  height: 100vh !important;
+  object-fit: cover !important;
+  object-position: center !important;
 }
-.zoom{
+
+.zoom {
   transition: transform .2s;
 }
-.zoom:hover{
-  -ms-transform: scale(1.1)!important;
-  -webkit-transform: scale(1.1)!important;
-  transform: scale(1.1)!important; 
+
+.zoom:hover {
+  -ms-transform: scale(1.1) !important;
+  -webkit-transform: scale(1.1) !important;
+  transform: scale(1.1) !important;
 }
-a:hover{
-  text-decoration: none!important;
+
+a:hover {
+  text-decoration: none !important;
 }
+
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
@@ -40,6 +44,7 @@ h5,
 h6 {
   font-family: "Roboto", sans-serif;
 }
+
 /*--------------------------------------------------------------
 # Top Bar
 --------------------------------------------------------------*/
@@ -445,6 +450,7 @@ h6 {
 #hero .btn-get-started:hover {
   background: #247cf0;
 }
+
 @media (min-width: 1024px) {
   #hero {
     background-attachment: fixed;
@@ -478,6 +484,36 @@ h6 {
     height: 120vh;
   }
 }
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #106eea;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+  visibility: hidden;
+}
+
+.back-to-top.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top i {
+  font-size: 24px;
+}
+
+a:hover .back-to-top {
+  color: #fff;
+}
+
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/

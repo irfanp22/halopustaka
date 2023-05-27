@@ -84,7 +84,7 @@ if (isset($_POST['login'])) {
                     setcookie('key', hash('sha256', $data['nim']), time() + 60);
                 }
             }
-        }else {
+        } else {
             echo '<script>
                 swal("Password Salah!", "", "error").then(function(){
                     window.location.assign("masuk.php?sebagai=' . $tabel_masuk . '");
@@ -108,33 +108,45 @@ if (isset($_POST['login'])) {
     }
 }
 ?>
-<div id="bg"></div>
-<form action="masuk.php" method="post" name="masuk" id="masuk">
-    <?php
-    if ($_SESSION['role'] == "anggota") {
-        echo '<div class="form-field">
-                <input type="text" name="username" id="username" placeholder="NIM" required/>
-            </div>';
-    } else {
-        echo '<div class="form-field">
-                <input type="text" name="username" id="username" placeholder="ID" required/>
-            </div>';
-    }
-
-    ?>
-
-    <div class="form-field">
-        <input type="password" name="password" id="password" placeholder="Password" required />
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="login-container">
+                <div class="text-end">
+                    <a href="./index.php" class="btn btn-light"><i class="bi bi-arrow-left"></i> Go back to home</a>
+                </div>
+                <form action="masuk.php" method="post" name="masuk" id="masuk">
+                    <div class="mb-3">
+                        <?php
+                        if ($_SESSION['role'] == "anggota") {
+                            echo '<label for="username" class="form-label">NIM</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Masukan NIM anda" required>';
+                        } else {
+                            echo '<label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Masukan username anda" required>';
+                        }
+                        ?>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="Masukan password anda">
+                            <button class="btn btn-outline-secondary" type="button" id="show-password">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" name="remember" id="remember">
+                        <label class="form-check-label" for="remember">Remember me</label>
+                    </div>
+                    <button type="submit" name="login" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <span class="form-field form-inline">
-        <input type="checkbox" name="remember" id="remember" />
-        <label for="remember" class="label text-white ">Remember Me</label>
-    </span>
-
-    <div class="form-field">
-        <button class="btn" type="submit" name="login" id="login">Log in</button>
-    </div>
-</form>
+</div>
 
 <?php
 include "template/foot.php";

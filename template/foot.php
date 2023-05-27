@@ -1,51 +1,60 @@
-    <?php
-    if ($title == "Daftar Buku" || $title == "Profil") {
+<?php
+if ($title == "Daftar Buku" || $title == "Profil") {
     ?>
-        <div class="card mb-3 w-100 mt-4">
-            <div class="card-header text-center font-weight-bold">Halo Pustaka</div>
-            <div class="card-body text-dark">
-                <p class="card-text text-center">Copyright &copy; 2022 | Sistem Informasi Perpustakaan Halo Pustaka</p>
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container py-4 mt-3 w-100">
+            <div class="copyright">
+                Copyright &copy; 2023 <strong><span>Halo Pustaka</span></strong>. All Rights
+                Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
             </div>
         </div>
+    </footer><!-- End Footer -->
     <?php
-    }
-    ?>
-    <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+}
+?>
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Template Main JS File -->
-    <script src="js/main.js"></script>
-    
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+<!-- Template Main JS File -->
+<script src="js/main.js"></script>
 
-    <script src="assets/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
-    <script src="assets/DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
 
-    <script src="assets/DataTables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
-    <script src="assets/DataTables/Buttons-1.5.6/js/buttons.bootstrap4.min.js"></script>
-    <script src="assets/DataTables/JSZip-2.5.0/jszip.min.js"></script>
-    <script src="assets/DataTables/pdfmake-0.1.36/pdfmake.min.js"></script>
-    <script src="assets/DataTables/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="assets/DataTables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-    <script src="assets/DataTables/Buttons-1.5.6/js/buttons.print.min.js"></script>
-    <script src="assets/DataTables/Buttons-1.5.6/js/buttons.colVis.min.js"></script>
+<script src="assets/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="assets/DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<script src="assets/DataTables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+<script src="assets/DataTables/Buttons-1.5.6/js/buttons.bootstrap4.min.js"></script>
+<script src="assets/DataTables/JSZip-2.5.0/jszip.min.js"></script>
+<script src="assets/DataTables/pdfmake-0.1.36/pdfmake.min.js"></script>
+<script src="assets/DataTables/pdfmake-0.1.36/vfs_fonts.js"></script>
+<script src="assets/DataTables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+<script src="assets/DataTables/Buttons-1.5.6/js/buttons.print.min.js"></script>
+<script src="assets/DataTables/Buttons-1.5.6/js/buttons.colVis.min.js"></script>
 
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="js/sb-admin-2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="js/sb-admin-2.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
+    integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 
-    <script>
-        $(document).ready(function() {
-            var table = $('#table').DataTable({
-                search: {
-                    search: "<?php if (isset($_POST['searchbtn'])) echo $_POST['searchkey']  ?>"
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var table = $('#table').DataTable({
+            search: {
+                search: "<?php if (isset($_POST['searchbtn']))
+                    echo $_POST['searchkey'] ?>"
                 },
             });
             var table1 = $('#table2').DataTable({
@@ -112,7 +121,7 @@
                     "tahun": thn
                 },
                 dataType: "JSON",
-                success: function(data) {
+                success: function (data) {
                     var denda = [data.denda1, data.denda2, data.denda3, data.denda4, data.denda5, data.denda6, data.denda7, data.denda8, data.denda9, data.denda10, data.denda11, data.denda12];
                     var pinjam = [data.bulan1, data.bulan2, data.bulan3, data.bulan4, data.bulan5, data.bulan6, data.bulan7, data.bulan8, data.bulan9, data.bulan10, data.bulan11, data.bulan12];
                     for (var i = 0; i < 12; i++) {
@@ -158,7 +167,7 @@
                         }
                     });
                 },
-                error: function(data) {
+                error: function (data) {
                     console.log("ERROR".concat(data));
                 }
             })
@@ -168,25 +177,26 @@
             window.history.replaceState(null, null, window.location.href);
         }
 
-        $(".confirmAlert").on("click", function() {
+        $(".confirmAlert").on("click", function () {
             var getLink = $(this).attr('href');
             Swal.fire({
-                title: "Yakin hapus data?<?php if ($_GET['page'] == "viewrak") echo " Data buku juga akan terhapus!" ?>",
-                icon: 'warning',
+                title: "Yakin hapus data?<?php if ($_GET['page'] == "viewrak")
+                    echo " Data buku juga akan terhapus!" ?> ",
+                                    icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 confirmButtonText: 'Ya',
                 cancelButtonColor: '#3085d6',
                 cancelButtonText: "Batal",
-            }).then(result => {
-                if (result.isConfirmed) {
-                    window.location.href = getLink;
-                }
-            });
-            return false;
-        });
+                                }).then(result => {
+                    if (result.isConfirmed) {
+                        window.location.href = getLink;
+                    }
+                });
+        return false;
+                            });
 
-        $(".confirmAcc").on("click", function() {
+        $(".confirmAcc").on("click", function () {
             var getLink = $(this).attr('href');
             Swal.fire({
                 title: "Yakin Konfirmasi Peminjaman?",
@@ -204,16 +214,16 @@
             return false;
         });
 
-        $(".confirmPinjam").on("click", function() {
+        $(".confirmPinjam").on("click", function () {
             var judul = $(this).data('judul');
             Swal.fire({
                 title: "Apakah anda ingin melakukan permintaan peminjaman terhadap buku \"".concat(judul).concat("\"?"),
                 icon: 'warning',
                 text: "Permintaan akan expire dalam 24 jam jika tidak diproses!",
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Ya',
-                cancelButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
                 cancelButtonText: "Batal",
             }).then(result => {
                 if (result.isConfirmed) {
@@ -231,12 +241,12 @@
                             id_buku: id_buku,
                             nim: nim
                         },
-                        success: function() {
-                            Swal.fire('Peminjaman Buku Berhasil Diajukan', '', 'success').then(function() {
+                        success: function () {
+                            Swal.fire('Peminjaman Buku Berhasil Diajukan', '', 'success').then(function () {
                                 window.location.assign("profil.php");
                             });
                         },
-                        error: function() {
+                        error: function () {
                             Swal.fire('ERROR', '', 'error');
                         }
                     });
@@ -245,7 +255,7 @@
             return false;
         });
 
-        $(".confirmKembali").on("click", function() {
+        $(".confirmKembali").on("click", function () {
             var id = $(this).data('id');
             Swal.fire({
                 title: "Yakin Konfirmasi Pengembalian?",
@@ -268,13 +278,13 @@
                             'id_kem': id
                         },
                         dataType: "JSON",
-                        success: function(data) {
-                            if (data.msg == 1) Swal.fire("Pengembalian Berhasil Dikonfirmasi", "", "success").then(function() {
+                        success: function (data) {
+                            if (data.msg == 1) Swal.fire("Pengembalian Berhasil Dikonfirmasi", "", "success").then(function () {
                                 window.location.assign('?page=viewpeminjaman')
                             });
                             else Swal.fire("Pengembalian Gagal Dikonfirmasi", "", "error");
                         },
-                        error: function() {
+                        error: function () {
                             Swal.fire("JSON ERROR", "", "error");
                         }
                     })
@@ -283,7 +293,7 @@
             return false;
         });
 
-        $('.btneditkateg').click(function() {
+        $('.btneditkateg').click(function () {
             var id = $(this).data('id');
             var nama = $(this).data('nama');
 
@@ -291,7 +301,7 @@
             $('.namakategori').val(nama);
         });
 
-        $('.btneditrak').click(function() {
+        $('.btneditrak').click(function () {
             var id = $(this).data('id');
             var nama = $(this).data('nama');
 
@@ -299,7 +309,7 @@
             $('.namarak').val(nama);
         });
 
-        $('.btndetailbuku').click(function() {
+        $('.btndetailbuku').click(function () {
             var id_buku = $(this).data('id');
             $.ajax({
                 url: "detailbuku.php",
@@ -308,7 +318,7 @@
                     id_buku: id_buku
                 },
                 dataType: "JSON",
-                success: function(data) {
+                success: function (data) {
                     $('.id_buku').text(data.id_buku);
                     $('.isbn').text(data.isbn);
                     $('.judul').text(data.judul);
@@ -325,7 +335,7 @@
             })
         });
 
-        $('.btndetailpeminjaman').click(function() {
+        $('.btndetailpeminjaman').click(function () {
             var id_peminjaman = $(this).data('id');
             $.ajax({
                 url: "detailpeminjaman.php",
@@ -334,7 +344,7 @@
                     id_peminjaman: id_peminjaman
                 },
                 dataType: "JSON",
-                success: function(data) {
+                success: function (data) {
                     $('.id_peminjaman').text(data.id_peminjaman);
                     $('.buku').text(data.buku);
                     $('.anggota').text(data.anggota);
@@ -347,7 +357,7 @@
             })
         });
 
-        $('.btneditpeminjaman').click(function() {
+        $('.btneditpeminjaman').click(function () {
             var id_peminjaman = $(this).data('id');
             $('.id_peminjaman').val(id_peminjaman);
             $.ajax({
@@ -357,7 +367,7 @@
                     id_peminjaman: id_peminjaman
                 },
                 dataType: "JSON",
-                success: function(data) {
+                success: function (data) {
                     $('#id_buku_edit').data('selectize').setValue(data.id_buku);
                     $('#nim_edit').data('selectize').setValue(data.nim);
                     if (data.status == "process") {
@@ -369,7 +379,7 @@
             })
         });
 
-        $('.btndetailmahasiswa').click(function() {
+        $('.btndetailmahasiswa').click(function () {
             var nim = $(this).data('id');
             $.ajax({
                 url: "detailmahasiswa.php",
@@ -378,7 +388,7 @@
                     nim: nim
                 },
                 dataType: "JSON",
-                success: function(data) {
+                success: function (data) {
                     console.log(data.nim);
                     $('.nim').text(data.nim);
                     $('.nama').text(data.nama);
