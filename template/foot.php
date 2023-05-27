@@ -20,34 +20,29 @@ if ($title == "Daftar Buku" || $title == "Profil") {
         class="bi bi-arrow-up-short"></i></a>
 
 <!-- Template Main JS File -->
-<script src="js/main.js"></script>
-<script src="js/admin.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/admin.js"></script>
 
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
 
-<script src="assets/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
-<script src="assets/DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
-
-<script src="assets/DataTables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
-<script src="assets/DataTables/Buttons-1.5.6/js/buttons.bootstrap4.min.js"></script>
-<script src="assets/DataTables/JSZip-2.5.0/jszip.min.js"></script>
-<script src="assets/DataTables/pdfmake-0.1.36/pdfmake.min.js"></script>
-<script src="assets/DataTables/pdfmake-0.1.36/vfs_fonts.js"></script>
-<script src="assets/DataTables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-<script src="assets/DataTables/Buttons-1.5.6/js/buttons.print.min.js"></script>
-<script src="assets/DataTables/Buttons-1.5.6/js/buttons.colVis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script
+    src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/datatables.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="vendor/apexcharts/apexcharts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
     integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <script>
     $(document).ready(function () {
@@ -226,19 +221,19 @@ if ($title == "Daftar Buku" || $title == "Profil") {
             Swal.fire({
                 title: "Yakin hapus data?<?php if ($_GET['page'] == "viewrak")
                     echo " Data buku juga akan terhapus!" ?> ",
-                                                                                                                                icon: 'warning',
+                                                                                                                                                                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Ya',
                 cancelButtonColor: '#d33',
                 cancelButtonText: "Batal",
-                                                                                                                            }).then(result => {
+                                                                                                                                                            }).then(result => {
                     if (result.isConfirmed) {
                         window.location.href = getLink;
                     }
                 });
         return false;
-                            });
+                                                            });
 
         $(".confirmAcc").on("click", function () {
             var getLink = $(this).attr('href');

@@ -9,7 +9,7 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active ukur" data-bs-interval="5000">
-            <img src="./img/a.jpg" class="d-block w-100" alt="...">
+            <img src="assets/img/a.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h5>"Perpustakaan menyimpan energi yang memicu imajinasi.
                     Perpustakaan membuka jendela ke dunia dan menginspirasi kita untuk mengeksplorasi dan mencapai, dan
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="carousel-item ukur" data-bs-interval="5000">
-            <img src="./img/b.jpg" class="d-block w-100" alt="...">
+            <img src="assets/img/b.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h5>"Kamu ingin senjata? Kita ada di perpustakaan. Buku adalah senjata terbaik di dunia. Ruangan ini
                     gudang senjata terhebat yang bisa kita miliki. Persenjatai dirimu!"</h5>
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="carousel-item ukur">
-            <img src="./img/c.jpg" class="d-block w-100" alt="...">
+            <img src="assets/img/c.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h5 class="text-body font-weight-bold">"Perpustakaan yang buruk membangun koleksi, perpustakaan yang
                     baik membangun layanan, perpustakaan yang hebat membangun komunitas."</h5>
