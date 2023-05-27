@@ -16,12 +16,12 @@ if ($title == "Daftar Buku" || $title == "Profil") {
     <?php
 }
 ?>
-<div id="preloader"></div>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
 
 <!-- Template Main JS File -->
 <script src="js/main.js"></script>
+<script src="js/admin.js"></script>
 
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -42,7 +42,7 @@ if ($title == "Daftar Buku" || $title == "Profil") {
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="js/sb-admin-2.min.js"></script>
+<script src="vendor/apexcharts/apexcharts.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
     integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
@@ -69,8 +69,22 @@ if ($title == "Daftar Buku" || $title == "Profil") {
             });
             var table2 = $('#riwayat').DataTable();
 
-            var table3 = $('#table3').DataTable();
-            var table4 = $('#table4').DataTable();
+            var table3 = $('#table3').DataTable({
+                dom: 'Qlfrtip',
+                searchBuilder: {
+                    columns: [0, 1]
+                },
+                lengthMenu: [10, 25, 50, 75, 100], // Set the available options for the number of records per page
+                pageLength: 10,
+            });
+            var table4 = $('#table4').DataTable({
+                dom: 'Qlfrtip',
+                searchBuilder: {
+                    columns: [0, 1]
+                },
+                lengthMenu: [10, 25, 50, 75, 100], // Set the available options for the number of records per page
+                pageLength: 10,
+            });
             var table5 = $('#table5').DataTable({
                 buttons: ['copy', 'csv', 'print', 'excel', 'pdf', 'colvis'],
                 dom: "<'row'<'col-md-3'l><'col-md-5'B><'col-md-4'f>>" +
@@ -127,45 +141,75 @@ if ($title == "Daftar Buku" || $title == "Profil") {
                     for (var i = 0; i < 12; i++) {
                         if (denda[i] == null) denda[i] = 0;
                     }
-                    var chartdata = {
-                        datasets: [{
-                            data: pinjam,
-                            label: 'Peminjaman Buku',
-
-                            // This binds the dataset to the left y axis
-                            yAxisID: 'left-y-axis'
-                        }, {
-                            data: denda,
-                            label: 'Denda',
-
-                            // This binds the dataset to the right y axis
-                            yAxisID: 'right-y-axis'
-                        }],
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des']
-                    }
-                    const repchart = document.getElementById('report');
-                    const myChart = new Chart(repchart, {
-                        type: 'line',
-                        data: chartdata,
-                        options: {
-                            responsive: true,
-                            interaction: {
-                                mode: 'index',
-                                intersect: false,
-                            },
+                    var options = {
+                        chart: {
+                            type: 'line',
+                            height: 350,
                             stacked: false,
-                            scales: {
-                                'left-y-axis': {
-                                    type: 'linear',
-                                    position: 'left'
+                            toolbar: {
+                                show: false
+                            }
+                        },
+                        series: [{
+                            name: 'Peminjaman Buku',
+                            data: pinjam
+                        }, {
+                            name: 'Denda',
+                            data: denda
+                        }],
+                        colors: ['#008FFB', '#FF4560'],
+                        dataLabels: {
+                            enabled: false
+                        },
+                        stroke: {
+                            width: [2, 2]
+                        },
+                        grid: {
+                            padding: {
+                                right: 15
+                            }
+                        },
+                        markers: {
+                            size: 0
+                        },
+                        xaxis: {
+                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des']
+                        },
+                        yaxis: [{
+                            title: {
+                                text: 'Peminjaman Buku',
+                            },
+                        }, {
+                            opposite: true,
+                            title: {
+                                text: 'Denda',
+                            },
+                        }],
+                        legend: {
+                            position: 'top',
+                            horizontalAlign: 'right',
+                            offsetY: -10
+                        },
+                        responsive: [{
+                            breakpoint: 600,
+                            options: {
+                                chart: {
+                                    toolbar: {
+                                        show: false
+                                    }
                                 },
-                                'right-y-axis': {
-                                    type: 'linear',
-                                    position: 'right'
+                                legend: {
+                                    position: 'bottom',
+                                    horizontalAlign: 'center',
+                                    offsetY: 0
                                 }
                             }
-                        }
-                    });
+                        }]
+                    }
+
+                    var chart = new ApexCharts(document.querySelector("#report"), options);
+                    chart.render();
+
                 },
                 error: function (data) {
                     console.log("ERROR".concat(data));
@@ -182,13 +226,13 @@ if ($title == "Daftar Buku" || $title == "Profil") {
             Swal.fire({
                 title: "Yakin hapus data?<?php if ($_GET['page'] == "viewrak")
                     echo " Data buku juga akan terhapus!" ?> ",
-                                    icon: 'warning',
+                                                                                                                                icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Ya',
-                cancelButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
                 cancelButtonText: "Batal",
-                                }).then(result => {
+                                                                                                                            }).then(result => {
                     if (result.isConfirmed) {
                         window.location.href = getLink;
                     }
@@ -202,9 +246,9 @@ if ($title == "Daftar Buku" || $title == "Profil") {
                 title: "Yakin Konfirmasi Peminjaman?",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Ya',
-                cancelButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
                 cancelButtonText: "Batal",
             }).then(result => {
                 if (result.isConfirmed) {
@@ -264,9 +308,9 @@ if ($title == "Daftar Buku" || $title == "Profil") {
                 inputLabel: "Denda tambahan",
                 inputPlaceholder: "Masukan denda tambahan",
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Ya',
-                cancelButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
                 cancelButtonText: "Batal",
             }).then(result => {
                 if (result.isConfirmed) {

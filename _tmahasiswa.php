@@ -77,8 +77,9 @@ if (isset($_POST['tambahmahasiswa'])) {
 <div class="container">
     <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
-            <h4 class="text-center">Pendaftaran Anggota Perpustakaan</h4>
-            <form action="dashboard.php?page=tmahasiswa" method="post" name="tambahmahasiswa" enctype="multipart/form-data">
+            <h4 class="text-center mt-3 mb-3">Pendaftaran Anggota Perpustakaan</h4>
+            <form action="dashboard.php?page=tmahasiswa" method="post" name="tambahmahasiswa"
+                enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-sm-3">
                         <h6 class="mb-0">NIM</h6>
@@ -93,7 +94,8 @@ if (isset($_POST['tambahmahasiswa'])) {
                         <h6 class="mb-0">Nama</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukan Nama" required>
+                        <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukan Nama"
+                            required>
                     </div>
                 </div>
                 <hr>
@@ -132,7 +134,8 @@ if (isset($_POST['tambahmahasiswa'])) {
                         <h6 class="mb-0">Alamat</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <textarea name="alamat" id="alamat" cols="30" rows="10" class="form-control" placeholder="Masukan Alamat"></textarea>
+                        <textarea name="alamat" id="alamat" cols="30" rows="10" class="form-control"
+                            placeholder="Masukan Alamat"></textarea>
                     </div>
                 </div>
                 <hr>
@@ -151,7 +154,8 @@ if (isset($_POST['tambahmahasiswa'])) {
                         <h6 class="mb-0">Password</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="password" name="password" id="password" class="form-control" placeholder="Masukan Password" required>
+                        <input type="password" name="password" id="password" class="form-control"
+                            placeholder="Masukan Password" required>
                     </div>
                 </div>
                 <hr>
@@ -160,7 +164,8 @@ if (isset($_POST['tambahmahasiswa'])) {
                         <h6 class="mb-0">Konfirmasi Password</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="password" name="konpass" id="konpass" class="form-control" placeholder="Konfirmasi Password" required>
+                        <input type="password" name="konpass" id="konpass" class="form-control"
+                            placeholder="Konfirmasi Password" required>
                     </div>
                 </div>
                 <hr>

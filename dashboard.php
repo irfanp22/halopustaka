@@ -1,309 +1,279 @@
-    <?php
-    $title = "Dashboard";
-    $css = "sb-admin-2.min.css";
-    session_start();
-    include "template/head.php";
-    include "koneksi.php";
-    if (isset($_SESSION['username']) && $_SESSION['role'] == "anggota") header('location: index.php');
-    ?>
+<?php
+$title = "Dashboard";
+$css = "admin.css";
+session_start();
+include "template/head.php";
+include "koneksi.php";
+if (isset($_SESSION['username']) && $_SESSION['role'] == "anggota")
+    header('location: index.php');
+?>
 
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="dashboard.php" class="logo d-flex align-items-center">
+            <img src="assets/img/favicon.png" alt="">
+            <span class="d-none d-lg-block">Halo Pustaka</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-solid fa-book-open"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Halo <br> Pustaka</div>
-            </a>
+            <li class="nav-item dropdown pe-3">
+                <?php
+                $sql = mysqli_query($koneksi, "SELECT pic FROM " . $_SESSION['role'] . " WHERE id_pengurus = '" . $_SESSION['username'] . "'");
+                $data = mysqli_fetch_array($sql);
+                ?>
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="assets/img/<?php echo $data['pic'] ?>" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">
+                        <?php echo $_SESSION['nama'] ?>
+                    </span>
+                </a><!-- End Profile Iamge Icon -->
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="?page=profil">
+                            <i class="bi bi-person"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="dashboard.php">
-                    <i class="fas fa-fw fa-home"></i>
-                    <span>Dashboard</span></a>
-            </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="#" data-bs-toggle="modal"
+                            data-bs-target="#logoutModal">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Manajemen Anggota
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-user-circle"></i>
-                    <span>Manajemen Anggota</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?page=tmahasiswa">Tambah Anggota</a>
-                        <a class="collapse-item" href="?page=viewmahasiswa">Daftar Anggota</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Manajemen Buku
-            </div>
-
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities1" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Manajemen Buku</span>
-                </a>
-                <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?page=tbuku">Tambah Buku</a>
-                        <a class="collapse-item" href="?page=viewbuku">Daftar Buku</a>
-                        <a class="collapse-item" href="?page=viewrak">Rak dan Kategori</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Transaksi Buku
-            </div>
-
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Transaksi Buku</span>
-                </a>
-                <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?page=viewpeminjaman">Daftar Peminjaman Buku</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <?php 
-            if($_SESSION['level']=='owner')echo'<!-- Heading -->
-            <div class="sidebar-heading">
-                Manajemen Pengurus
-            </div>
-
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities3" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-user-circle"></i>
-                    <span>Manajemen Pengurus</span>
-                </a>
-                <div id="collapseUtilities3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?page=tpetugas">Tambah Petugas</a>
-                        <a class="collapse-item" href="?page=viewpetugas">Daftar Petugas</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">'; ?>
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
 
         </ul>
-        <!-- End of Sidebar -->
+    </nav><!-- End Icons Navigation -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+</header><!-- End Header -->
 
-            <!-- Main Content -->
-            <div id="content">
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
+    <ul class="sidebar-nav" id="sidebar-nav">
 
+        <li class="nav-item">
+            <a class="nav-link " href="dashboard.php">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
 
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-people"></i><span>Manajemen Anggota</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="?page=tmahasiswa">
+                        <i class="bi bi-circle"></i><span>Tambah Anggota</span>
+                    </a>
+                </li>
+                <li>
+                <li>
+                    <a href="?page=viewmahasiswa">
+                        <i class="bi bi-circle"></i><span>Daftar Anggota</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Components Nav -->
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Manajemen Buku</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="?page=tbuku">
+                        <i class="bi bi-circle"></i><span>Tambah Buku</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="?page=viewbuku">
+                        <i class="bi bi-circle"></i><span>Daftar Buku</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="?page=viewrak">
+                        <i class="bi bi-circle"></i><span>Rak dan Kategori</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Forms Nav -->
 
-                        <div class="topbar-divider d-none d-sm-block"></div>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-arrow-down-up"></i><span>Transaksi Buku</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="?page=viewpeminjaman">
+                        <i class="bi bi-circle"></i><span>Daftar Peminjaman Buku</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Tables Nav -->
 
-                        <!-- Nav Item - User Information -->
+        <?php
+        if ($_SESSION['level'] == 'owner') { ?>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-kanban"></i><span>Manajemen Pengurus</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="?page=tpetugas">
+                            <i class="bi bi-circle"></i><span>Tambah Pengurus</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="?page=viewpetugas">
+                            <i class="bi bi-circle"></i><span>Daftar Pengurus</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Charts Nav -->
+        <?php } ?>
+    </ul>
 
-                        <?php
-                        $sql = mysqli_query($koneksi, "SELECT pic FROM " . $_SESSION['role'] . " WHERE id_pengurus = '" . $_SESSION['username'] . "'");
-                        $data = mysqli_fetch_array($sql);
-                        ?>
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nama'] ?></span>
-                                <img class="img-profile rounded-circle" src="assets/img/<?php echo $data['pic'] ?>" alt="profile">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="?page=profil">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profil
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
-                        <?php
-                        ?>
+</aside><!-- End Sidebar-->
 
-                    </ul>
-
-                </nav>
-                <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <?php
-                    if (isset($_GET['page'])) {
-                        $act = $_GET['page'];
-                    }
-                    
-                    switch ($act) {
-                        case "":
-                            $halaman = "_home.php";
-                            $judul = "Dashboard";
-                            break;
-                        case "profil":
-                            $halaman = "_profil.php";
-                            $judul = "Profil";
-                            break;
-                        case "tmahasiswa":
-                            $halaman = "_tmahasiswa.php";
-                            $judul = "Tambah Mahasiswa";
-                            break;
-                        case "editmahasiswa":
-                            $halaman = "_editmahasiswa.php";
-                            $judul = "Edit Mahasiswa";
-                            break;
-                        case "viewmahasiswa":
-                            $halaman = "_viewmahasiswa.php";
-                            $judul = "Daftar Mahasiswa";
-                            break;
-                        case "tbuku":
-                            $halaman = "_tbuku.php";
-                            $judul = "Tambah Buku";
-                            break;
-                        case "editbuku":
-                            $halaman = "_editbuku.php";
-                            $judul = "Edit Buku";
-                            break;
-                        case "viewbuku":
-                            $halaman = "_viewbuku.php";
-                            $judul = "Daftar Buku";
-                            break;
-                        case "viewrak":
-                            $halaman = "_viewrak.php";
-                            $judul = "Rak dan Kategori";
-                            break;
-                        case "viewpeminjaman":
-                            $halaman = "_viewpeminjaman.php";
-                            $judul = "Daftar Peminjaman";
-                            break;
-                        case "tpetugas":
-                            $halaman = "_tpetugas.php";
-                            $judul = "Tambah Petugas";
-                            break;
-                        case "viewpetugas":
-                            $halaman = "_viewpetugas.php";
-                            $judul = "Daftar Petugas";
-                            break;
-                        case "editpetugas":
-                            $halaman = "_editpetugas.php";
-                            $judul = "Edit Petugas";
-                            break;
-                        default:
-                            echo '<script>swal("Maaf halaman tidak ada", "", "error").then(function(){
-                                window.location.assign("?page=");
-                                });</script>';
-                    }
-                    ?>
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 text-uppercase"><?php echo $judul; ?></h1>
-                    </div><?php
-                            include $halaman;
-                            ?>
-                </div>
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>
-                            <p class="mb-1">Copyright &copy; 2022 | Sistem Informasi Perpustakaan Halo Pustaka</p>
-                        </span><br>
-                    </div>
-                </div>
-            </footer>
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Yakin Mau Keluar?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Pilih Option "Logout" Untuk Keluar Dan Pilih Option "Cancel" Untuk Membatalkan</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="keluar.php">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<main id="main" class="main">
 
     <?php
-    include "template/foot.php";
+    if (isset($_GET['page'])) {
+        $act = $_GET['page'];
+    }
+
+    switch ($act) {
+        case "":
+            $halaman = "_home.php";
+            $judul = "Dashboard";
+            break;
+        case "profil":
+            $halaman = "_profil.php";
+            $judul = "Profil";
+            break;
+        case "tmahasiswa":
+            $halaman = "_tmahasiswa.php";
+            $judul = "Tambah Mahasiswa";
+            break;
+        case "editmahasiswa":
+            $halaman = "_editmahasiswa.php";
+            $judul = "Edit Mahasiswa";
+            break;
+        case "viewmahasiswa":
+            $halaman = "_viewmahasiswa.php";
+            $judul = "Daftar Mahasiswa";
+            break;
+        case "tbuku":
+            $halaman = "_tbuku.php";
+            $judul = "Tambah Buku";
+            break;
+        case "editbuku":
+            $halaman = "_editbuku.php";
+            $judul = "Edit Buku";
+            break;
+        case "viewbuku":
+            $halaman = "_viewbuku.php";
+            $judul = "Daftar Buku";
+            break;
+        case "viewrak":
+            $halaman = "_viewrak.php";
+            $judul = "Rak dan Kategori";
+            break;
+        case "viewpeminjaman":
+            $halaman = "_viewpeminjaman.php";
+            $judul = "Daftar Peminjaman";
+            break;
+        case "tpetugas":
+            $halaman = "_tpetugas.php";
+            $judul = "Tambah Petugas";
+            break;
+        case "viewpetugas":
+            $halaman = "_viewpetugas.php";
+            $judul = "Daftar Petugas";
+            break;
+        case "editpetugas":
+            $halaman = "_editpetugas.php";
+            $judul = "Edit Petugas";
+            break;
+        default:
+            echo '<script>swal("Maaf halaman tidak ada", "", "error").then(function(){
+                                window.location.assign("?page=");
+                                });</script>';
+    }
     ?>
+    <div class="pagetitle">
+        <h1>
+            <?php echo $judul; ?>
+        </h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                <li class="breadcrumb-item active">
+                    <?php echo $judul; ?>
+                </li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+            <?php
+            include $halaman;
+            ?>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        Copyright &copy; 2023 <strong><span>HaloPustaka</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yakin Mau Keluar?</h5>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">Pilih Option "Logout" Untuk Keluar Dan Pilih Option "Cancel" Untuk Membatalkan</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="keluar.php">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<?php
+include "template/foot.php";
+?>

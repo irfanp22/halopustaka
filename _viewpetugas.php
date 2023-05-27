@@ -1,5 +1,5 @@
 <?php
-if($_SESSION['level']!="owner"){
+if ($_SESSION['level'] != "owner") {
     header("Location: dashboard.php");
 }
 
@@ -21,7 +21,7 @@ if (isset($_GET['id'])) {
 <div class="container">
     <div class="card" style="margin-top: 100px;">
         <div class="card-body">
-            <h4 class="text-center">Daftar Petugas</h4>
+            <h4 class="text-center mt-3 mb-3">Daftar Petugas</h4>
             <table id="table6" class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -37,17 +37,26 @@ if (isset($_GET['id'])) {
                     $id = $_SESSION['username'];
                     $hasil = mysqli_query($koneksi, "SELECT * FROM pengurus WHERE id_pengurus!='$id'");
                     while ($data = mysqli_fetch_array($hasil)) {
-                    ?>
+                        ?>
                         <tr>
-                            <td><?php echo $data["id_pengurus"] ?></td>
-                            <td class="text-capitalize"><?php echo $data["nama"] ?></td>
-                            <td class="text-capitalize"><?php echo $data["level"] ?></td>
-                            <td><img src="assets/img/<?php echo $data["pic"] ?>" alt="<?php echo $data["nama"] ?>" width="100px"></td>
-                            <td><a href="?page=editpetugas&id=<?php echo $data['id_pengurus'] ?>" class="btn btn-warning" id="btnedit"><i class="fas fa-pen-to-square"></i></a>
-                                <a href="?page=viewpetugas&id=<?php echo $data['id_pengurus'] ?>" class="btn btn-danger confirmAlert" id="btnhapus"><i class="fas fa-trash"></i></a>
+                            <td>
+                                <?php echo $data["id_pengurus"] ?>
+                            </td>
+                            <td class="text-capitalize">
+                                <?php echo $data["nama"] ?>
+                            </td>
+                            <td class="text-capitalize">
+                                <?php echo $data["level"] ?>
+                            </td>
+                            <td><img src="assets/img/<?php echo $data["pic"] ?>" alt="<?php echo $data["nama"] ?>"
+                                    width="100px"></td>
+                            <td><a href="?page=editpetugas&id=<?php echo $data['id_pengurus'] ?>"
+                                    class="btn btn-warning text-light" id="btnedit"><i class="fas fa-pen-to-square"></i></a>
+                                <a href="?page=viewpetugas&id=<?php echo $data['id_pengurus'] ?>"
+                                    class="btn btn-danger confirmAlert" id="btnhapus"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
-                    <?php
+                        <?php
                     }
                     ?>
                 </tbody>

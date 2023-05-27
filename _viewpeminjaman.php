@@ -11,12 +11,13 @@ if (isset($_POST['tambahpeminjaman'])) {
         echo "<script>
                 swal('Data Peminjaman Berhasil Ditambahkan!', '', 'success')
                 </script>";
-    } else echo "<script>
+    } else
+        echo "<script>
                 swal('Data Peminjaman Gagal Ditambahkan!', '', 'error');
                 </script>";
 }
 
-if(isset($_POST['editpeminjaman'])){
+if (isset($_POST['editpeminjaman'])) {
     $id = $_POST['id_peminjaman'];
     $id_buku = $_POST['id_buku'];
     $nim = $_POST['nim'];
@@ -27,7 +28,8 @@ if(isset($_POST['editpeminjaman'])){
         echo "<script>
                 swal('Data Peminjaman Berhasil Diedit!', '', 'success')
                 </script>";
-    } else echo "<script>
+    } else
+        echo "<script>
                 swal('Data Peminjaman Gagal Diedit!', '', 'error');
                 </script>";
 }
@@ -66,12 +68,13 @@ if (isset($_GET['id_acc'])) {
 <div class="container">
     <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
-            <div class="row mb-3">
+            <div class="row mt-3 mb-3">
                 <div class="col-md-9">
                     <h4 class="text-center">Daftar Peminjaman Buku</h4>
                 </div>
                 <div class="col-md-3">
-                    <a href="#" data-toggle="modal" data-target="#peminjamanModal" class="btn btn-primary">Tambah Peminjaman</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#peminjamanModal" class="btn btn-primary">Tambah
+                        Peminjaman</a>
                 </div>
             </div>
             <table id="table2" class="table table-striped table-bordered">
@@ -91,24 +94,51 @@ if (isset($_GET['id_acc'])) {
                     <?php
                     $hasil = mysqli_query($koneksi, "SELECT * FROM peminjaman");
                     while ($data = mysqli_fetch_array($hasil)) {
-                    ?>
+                        ?>
                         <tr>
-                            <td><?php echo $data["id_peminjaman"] ?></td>
-                            <td><?php echo $data["id_buku"] ?></td>
-                            <td><?php echo $data["nim"] ?></td>
-                            <td><?php echo $data["tanggal_pinjam"] ?></td>
-                            <td><?php echo $data["tanggal_kembali"] ?></td>
-                            <td><?php echo $data["denda"] ?></td>
-                            <td class="badge <?php if ($data['status'] == 'done') echo "badge-success";
-                                                elseif ($data['status'] == 'process') echo "badge-primary";
-                                                else echo "badge-warning" ?> text-uppercase"><?php echo $data['status'] ?></td>
-                            <td><a href="#" data-toggle="modal" data-target="#detailModal" data-id="<?php echo $data['id_peminjaman'] ?>" class="btn btn-primary btndetailpeminjaman"><i class="fas fa-circle-info"></i></a>
-                                <?php if ($data['status'] == 'book') echo '<a href="?page=viewpeminjaman&id_acc=' . $data['id_peminjaman'] . '" class="btn btn-success confirmAcc" id="btnacc"><i class="fas fa-check"></i></a>';
-                                    elseif($data['status'] == 'process') echo '<a href="#" class="btn btn-warning btneditpeminjaman" data-toggle="modal" data-target="#editPeminjaman" data-id="'.$data["id_peminjaman"].'"><i class="fas fa-pen-to-square"></i></a>' ?>
-                                <a href="?page=viewpeminjaman&id_del=<?php echo $data['id_peminjaman'] ?>" class="btn btn-danger confirmAlert" id="btnhapus"><i class="fas fa-trash"></i></a>
+                            <td>
+                                <?php echo $data["id_peminjaman"] ?>
+                            </td>
+                            <td>
+                                <?php echo $data["id_buku"] ?>
+                            </td>
+                            <td>
+                                <?php echo $data["nim"] ?>
+                            </td>
+                            <td>
+                                <?php echo $data["tanggal_pinjam"] ?>
+                            </td>
+                            <td>
+                                <?php echo $data["tanggal_kembali"] ?>
+                            </td>
+                            <td>
+                                <?php echo $data["denda"] ?>
+                            </td>
+                            <td class="badge <?php
+                            if ($data['status'] == 'done')
+                                echo "bg-success";
+                            elseif ($data['status'] == 'process')
+                                echo "bg-primary";
+                            else
+                                echo "bg-warning"
+                                    ?> text-light text-uppercase">
+                                <?php echo $data['status'] ?>
+                            </td>
+                            <td>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#detailModal"
+                                    data-id="<?php echo $data['id_peminjaman'] ?>"
+                                    class="btn btn-primary btndetailpeminjaman"><i class="fas fa-circle-info"></i></a>
+                                <?php
+                                if ($data['status'] == 'book')
+                                    echo '<a href="?page=viewpeminjaman&id_acc=' . $data['id_peminjaman'] . '" class="btn btn-success confirmAcc" id="btnacc"><i class="fas fa-check"></i></a>';
+                                elseif ($data['status'] == 'process')
+                                    echo '<a href="#" class="btn btn-warning text-light btneditpeminjaman" data-bs-toggle="modal" data-bs-target="#editPeminjaman" data-id="' . $data["id_peminjaman"] . '"><i class="fas fa-pen-to-square"></i></a>';
+                                ?>
+                                <a href="?page=viewpeminjaman&id_del=<?php echo $data['id_peminjaman'] ?>"
+                                    class="btn btn-danger confirmAlert" id="btnhapus"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
-                    <?php
+                        <?php
                     }
                     ?>
                 </tbody>
@@ -117,14 +147,13 @@ if (isset($_GET['id_acc'])) {
     </div>
 </div>
 
-<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Detail Peminjaman</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -192,20 +221,18 @@ if (isset($_GET['id_acc'])) {
                 <hr>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="peminjamanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="peminjamanModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Tambah Peminjaman</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="dashboard.php?page=viewpeminjaman" method="post" name="tambahpeminjaman">
                 <div class="modal-body">
@@ -221,10 +248,10 @@ if (isset($_GET['id_acc'])) {
                                 while ($data = mysqli_fetch_array($sql)) {
                                     $sedia = mysqli_fetch_array(mysqli_query($koneksi, "SELECT COUNT(id_buku) AS sedia FROM peminjaman WHERE id_buku='" . $data['id_buku'] . "' AND status != 'done'"));
                                     if (($data['stok'] - $sedia['sedia']) > 0) {
-                                        echo '
-                                    <option value="' . $data['id_buku'] . '">' . $data['id_buku'] . ' - ' . $data['judul'] . '</option>';
+                                        echo '<option value="' . $data['id_buku'] . '">' . $data['id_buku'] . ' - ' . $data['judul'] . '</option>';
                                     }
-                                } ?>
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>
@@ -238,48 +265,46 @@ if (isset($_GET['id_acc'])) {
                                 <option value="" class="form-control">-- pilih anggota --</option>
                                 <?php
                                 $sql = mysqli_query($koneksi, "SELECT * FROM anggota");
-                                while ($data = mysqli_fetch_array($sql)) echo '
-                                <option value="' . $data['nim'] . '" class="form-control">' . $data['nim'] . ' - ' . $data['nama'] . '</option>'
-                                ?>
-                            </select>
+                                while ($data = mysqli_fetch_array($sql))
+                                    echo '<option value="' . $data['nim'] . '" class="form-control">' . $data['nim'] . ' - ' . $data['nama'] . '</option>'
+                                        ?>
+                                </select>
+                            </div>
+                            <hr>
                         </div>
-                        <hr>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary" name="tambahpeminjaman">Tambah Peminjaman</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" name="tambahpeminjaman">Tambah Peminjaman</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="editPeminjaman" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Peminjaman</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <form action="dashboard.php?page=viewpeminjaman" method="post" name="epeminjaman">
-                <div class="modal-body">
-                    <div class="row">
-                        <input type="hidden" name="id_peminjaman" class="id_peminjaman">
-                        <div class="col-sm-4">
-                            <h6 class="mb-0">Buku</h6>
-                        </div>
-                        <div class="col-sm-8 text-secondary">
-                            <select name="id_buku" id="id_buku_edit" class="form-control" required>
-                                <option value="" class="form-control">-- pilih buku --</option>
-                                <?php
+    <div class="modal fade" id="editPeminjaman" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Peminjaman</h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="dashboard.php?page=viewpeminjaman" method="post" name="epeminjaman">
+                    <div class="modal-body">
+                        <div class="row">
+                            <input type="hidden" name="id_peminjaman" class="id_peminjaman">
+                            <div class="col-sm-4">
+                                <h6 class="mb-0">Buku</h6>
+                            </div>
+                            <div class="col-sm-8 text-secondary">
+                                <select name="id_buku" id="id_buku_edit" class="form-control" required>
+                                    <option value="" class="form-control">-- pilih buku --</option>
+                                    <?php
                                 $sql = mysqli_query($koneksi, "SELECT * FROM buku");
                                 while ($data = mysqli_fetch_array($sql)) {
-                                        echo '
-                                    <option value="' . $data['id_buku'] . '" class="form-control">' . $data['id_buku'] . ' - ' . $data['judul'] . '</option>';
-                                } ?>
+                                    echo '<option value="' . $data['id_buku'] . '" class="form-control">' . $data['id_buku'] . ' - ' . $data['judul'] . '</option>';
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>
@@ -293,18 +318,20 @@ if (isset($_GET['id_acc'])) {
                                 <option value="" class="form-control">-- pilih anggota --</option>
                                 <?php
                                 $sql = mysqli_query($koneksi, "SELECT * FROM anggota");
-                                while ($data = mysqli_fetch_array($sql)) echo '
-                                <option value="' . $data['nim'] . '" class="form-control">' . $data['nim'] . ' - ' . $data['nama'] . '</option>'
+                                while ($data = mysqli_fetch_array($sql))
+                                    echo '<option value="' . $data['nim'] . '" class="form-control">' . $data['nim'] . ' - ' . $data['nama'] . '</option>';
                                 ?>
                             </select>
                         </div>
-                        <hr>
                     </div>
+                    <hr>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button type="submit" name="editpeminjaman" id="editpeminjaman" class="btn btn-primary">Edit</button>
-                    <a href="#" class="btn btn-success confirmKembali" id="btnkembali" data-id="">Konfirmasi Pengembalian</a>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" name="editpeminjaman" id="editpeminjaman"
+                        class="btn btn-primary">Edit</button>
+                    <a href="#" class="btn btn-success confirmKembali" id="btnkembali" data-id="">Konfirmasi
+                        Pengembalian</a>
                 </div>
             </form>
         </div>

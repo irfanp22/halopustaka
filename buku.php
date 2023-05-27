@@ -11,9 +11,9 @@ if (isset($_SESSION['username']) && $_SESSION['role'] == "pengurus")
 ?>
 
 <div class="container">
-    <div class="card" style="margin-top: 100px;">
+    <div class="card mt-3">
         <div class="card-body">
-            <h4 class="text-center">Daftar Buku</h4>
+            <h4 class="text-center mt-3">Daftar Buku</h4>
             <table id="table" class="table table-striped table-bordered">
                 <thead>
                     <tr>

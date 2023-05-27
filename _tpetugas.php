@@ -1,5 +1,5 @@
 <?php
-if($_SESSION['level']=="petugas"){
+if ($_SESSION['level'] == "petugas") {
     header("Location: dashboard.php");
 }
 if (isset($_SESSION['role'])) {
@@ -28,7 +28,7 @@ if (isset($_POST['tambahpetugas'])) {
         $idprev = $query['id_pengurus'];
         $awl = substr($idprev, 0, 2);
         $no = intval(end(explode('G', $idprev, 3))) + 1;
-        $id = $awl.sprintf("%03d", $no);
+        $id = $awl . sprintf("%03d", $no);
         $namafoto = $id . "." . strtolower(end(explode('.', $_FILES["pic"]["name"])));
         $lokasifoto = $_FILES['pic']['tmp_name'];
         $fulldir = "assets/img/pengurus/" . $namafoto;
@@ -72,14 +72,15 @@ if (isset($_POST['tambahpetugas'])) {
 <div class="container">
     <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
-            <h4 class="text-center">Tambah Petugas Perpustakaan</h4>
+            <h4 class="text-center mt-3 mb-3">Tambah Petugas Perpustakaan</h4>
             <form action="dashboard.php?page=tpetugas" method="post" name="tambahpetugas" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-sm-3">
                         <h6 class="mb-0">Nama</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukan Nama" required>
+                        <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukan Nama"
+                            required>
                     </div>
                 </div>
                 <hr>
@@ -110,7 +111,8 @@ if (isset($_POST['tambahpetugas'])) {
                         <h6 class="mb-0">Password</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="password" name="password" id="password" class="form-control" placeholder="Masukan Password" required>
+                        <input type="password" name="password" id="password" class="form-control"
+                            placeholder="Masukan Password" required>
                     </div>
                 </div>
                 <hr>
@@ -119,7 +121,8 @@ if (isset($_POST['tambahpetugas'])) {
                         <h6 class="mb-0">Konfirmasi Password</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="password" name="konpass" id="konpass" class="form-control" placeholder="Konfirmasi Password" required>
+                        <input type="password" name="konpass" id="konpass" class="form-control"
+                            placeholder="Konfirmasi Password" required>
                     </div>
                 </div>
                 <hr>

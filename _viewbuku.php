@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
 <div class="container">
     <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
-            <h4 class="text-center">Daftar Buku</h4>
+            <h4 class="text-center mt-3 mb-3">Daftar Buku</h4>
             <table id="table2" class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -34,28 +34,46 @@ if (isset($_GET['id'])) {
                 </thead>
                 <tbody>
                     <?php
-                    $sql = "SELECT buku.id_buku, buku.isbn, buku.judul, buku.pengarang, buku.tahun_terbit, buku.stok, kategori.nama_kategori, rak.nama_rak FROM buku JOIN kategori ON buku.id_kategori = kategori.id_kategori JOIN rak ON buku.id_rak = rak.id_rak";
+                    $sql = "SELECT buku.id_buku, buku.isbn, buku.judul, buku.pengarang, buku.tahun_terbit, buku.stok, kategori.nama_kategori, rak.nama_rak FROM buku JOIN kategori ON buku.id_kategori COLLATE utf8mb4_unicode_ci = kategori.id_kategori JOIN rak ON buku.id_rak COLLATE utf8mb4_unicode_ci = rak.id_rak";
                     $hasil = mysqli_query($koneksi, $sql);
                     while ($data = mysqli_fetch_array($hasil)) {
-                    ?>
+                        ?>
                         <tr>
-                            <td><?php echo $data["id_buku"] ?></td>
-                            <td><?php echo $data["judul"] ?></td>
-                            <td><?php echo $data["pengarang"] ?></td>
-                            <td><?php echo $data["tahun_terbit"] ?></td>
-                            <td><?php echo $data["nama_kategori"] ?></td>
-                            <td><?php echo $data["stok"] ?></td>
+                            <td>
+                                <?php echo $data["id_buku"] ?>
+                            </td>
+                            <td>
+                                <?php echo $data["judul"] ?>
+                            </td>
+                            <td>
+                                <?php echo $data["pengarang"] ?>
+                            </td>
+                            <td>
+                                <?php echo $data["tahun_terbit"] ?>
+                            </td>
+                            <td>
+                                <?php echo $data["nama_kategori"] ?>
+                            </td>
+                            <td>
+                                <?php echo $data["stok"] ?>
+                            </td>
                             <?php
-                            $id=$data["id_buku"];
+                            $id = $data["id_buku"];
                             $sedia = mysqli_fetch_array(mysqli_query($koneksi, "SELECT COUNT(id_buku) AS sedia FROM peminjaman WHERE id_buku='$id' AND status != 'done'"));
                             ?>
-                            <td><?php echo $data['stok'] - $sedia['sedia']  ?></td>
-                            <td><a href="#" data-toggle="modal" data-target="#detailModal" data-id="<?php echo $data['id_buku'] ?>" class="btn btn-success btndetailbuku"><i class="fas fa-circle-info"></i></a>
-                                <a href="?page=editbuku&id=<?php echo $data['id_buku'] ?>" class="btn btn-warning" id="btnedit"><i class="fas fa-pen-to-square"></i></a>
-                                <a href="?page=viewbuku&id=<?php echo $data['id_buku'] ?>" class="btn btn-danger confirmAlert" id="btnhapus"><i class="fas fa-trash"></i></a>
+                            <td>
+                                <?php echo $data['stok'] - $sedia['sedia'] ?>
+                            </td>
+                            <td><a href="#" data-bs-toggle="modal" data-bs-target="#detailModal"
+                                    data-id="<?php echo $data['id_buku'] ?>" class="btn btn-success btndetailbuku"><i
+                                        class="fas fa-circle-info"></i></a>
+                                <a href="?page=editbuku&id=<?php echo $data['id_buku'] ?>"
+                                    class="btn btn-warning text-light" id="btnedit"><i class="fas fa-pen-to-square"></i></a>
+                                <a href="?page=viewbuku&id=<?php echo $data['id_buku'] ?>"
+                                    class="btn btn-danger confirmAlert" id="btnhapus"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
-                    <?php
+                        <?php
                     }
                     ?>
                 </tbody>
@@ -64,14 +82,13 @@ if (isset($_GET['id'])) {
     </div>
 </div>
 
-<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Detail Buku</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row ">
@@ -182,7 +199,7 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Tutup</button>
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
