@@ -1,11 +1,12 @@
 <?php
-
+include "trigger.php";
 if (isset($_POST['tambahpeminjaman'])) {
+    $id = before_insert_peminjaman();
     $id_buku = $_POST['id_buku'];
     $nim = $_POST['nim'];
     $status = "process";
     $tgl = date('Y-m-d H:i:s');
-    $query = "INSERT INTO peminjaman(id_buku, nim, tanggal_pinjam, status) VALUES('$id_buku', '$nim', '$tgl', '$status')";
+    $query = "INSERT INTO peminjaman(id_peminjaman, id_buku, nim, tanggal_pinjam, status) VALUES('$id', '$id_buku', '$nim', '$tgl', '$status')";
     $sql = mysqli_query($koneksi, $query);
     if ($sql) {
         echo "<script>
@@ -121,7 +122,7 @@ if (isset($_GET['id_acc'])) {
                                 echo "bg-primary";
                             else
                                 echo "bg-warning"
-                                    ?> text-light text-uppercase">
+                                    ?> text-light text-uppercase" style="text-align: center;">
                                 <?php echo $data['status'] ?>
                             </td>
                             <td>

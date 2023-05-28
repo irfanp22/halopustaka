@@ -23,8 +23,6 @@ if ($title == "Daftar Buku" || $title == "Profil") {
 <script src="assets/js/main.js"></script>
 <script src="assets/js/admin.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"
-    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
@@ -221,19 +219,19 @@ if ($title == "Daftar Buku" || $title == "Profil") {
             Swal.fire({
                 title: "Yakin hapus data?<?php if ($_GET['page'] == "viewrak")
                     echo " Data buku juga akan terhapus!" ?> ",
-                                                                                                                                                                icon: 'warning',
+                                                                                                                                                                                            icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Ya',
                 cancelButtonColor: '#d33',
                 cancelButtonText: "Batal",
-                                                                                                                                                            }).then(result => {
+                                                                                                                                                                                        }).then(result => {
                     if (result.isConfirmed) {
                         window.location.href = getLink;
                     }
                 });
         return false;
-                                                            });
+                                                                                        });
 
         $(".confirmAcc").on("click", function () {
             var getLink = $(this).attr('href');
@@ -295,7 +293,7 @@ if ($title == "Daftar Buku" || $title == "Profil") {
         });
 
         $(".confirmKembali").on("click", function () {
-            var id = $(this).data('id');
+            var id_kem = $(this).data('id');
             Swal.fire({
                 title: "Yakin Konfirmasi Pengembalian?",
                 icon: 'warning',
@@ -314,7 +312,7 @@ if ($title == "Daftar Buku" || $title == "Profil") {
                         method: "POST",
                         data: {
                             'dendaplus': result.value,
-                            'id_kem': id
+                            'id_kem': id_kem
                         },
                         dataType: "JSON",
                         success: function (data) {
@@ -410,12 +408,13 @@ if ($title == "Daftar Buku" || $title == "Profil") {
                     $('#id_buku_edit').data('selectize').setValue(data.id_buku);
                     $('#nim_edit').data('selectize').setValue(data.nim);
                     if (data.status == "process") {
-                        $('#btnkembali').attr('data-id', data.id_peminjaman);
+                        $('#btnkembali').data('id', data.id_peminjaman); // Update the data-id attribute
                     } else {
-                        document.getElementById('btnkembali').remove();
+                        $('#btnkembali').removeAttr('data-id'); // Remove the data-id attribute
+                        $('#btnkembali').hide(); // Optionally hide the button
                     }
                 }
-            })
+            });
         });
 
         $('.btndetailmahasiswa').click(function () {

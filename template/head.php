@@ -29,6 +29,8 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css"
         integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/<?php echo $css ?>">
     <?php if ($title != 'Dashboard') { ?>
         <link rel="stylesheet" href="assets/css/style.css">

@@ -7,8 +7,10 @@ if (isset($_SESSION['role'])) {
         header("Location: index.php");
     }
 }
+include "trigger.php";
 
 if (isset($_POST['tambahpetugas'])) {
+    $id = before_insert_pengurus();
     $nama = $_POST['nama'];
     $lvl = $_POST['lvl'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -34,7 +36,7 @@ if (isset($_POST['tambahpetugas'])) {
         $fulldir = "assets/img/pengurus/" . $namafoto;
         $dir = "pengurus/";
         $foto = $dir . $namafoto;
-        $query = "INSERT INTO pengurus(nama, password, level, pic) VALUES('$nama', '$password', '$lvl', '$foto')";
+        $query = "INSERT INTO pengurus(id_pengurus, nama, password, level, pic) VALUES('$id', '$nama', '$password', '$lvl', '$foto')";
         $sql = mysqli_query($koneksi, $query);
         if ($sql) {
             move_uploaded_file($lokasifoto, $fulldir);
@@ -51,7 +53,7 @@ if (isset($_POST['tambahpetugas'])) {
             exit;
         }
     } else {
-        $query = "INSERT INTO pengurus(nama, password, level) VALUES('$nama', '$password', '$lvl')";
+        $query = "INSERT INTO pengurus(id_pengurus, nama, password, level) VALUES('$id', '$nama', '$password', '$lvl')";
         $sql = mysqli_query($koneksi, $query);
         if ($sql) {
             echo "<script>
