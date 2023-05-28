@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 27 Bulan Mei 2023 pada 17.25
+-- Waktu pembuatan: 28 Bulan Mei 2023 pada 07.36
 -- Versi server: 10.11.3-MariaDB
 -- Versi PHP: 8.2.6
 
@@ -20,52 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_hp`
 --
-
-DELIMITER $$
---
--- Fungsi
---
-CREATE DEFINER=`root`@`localhost` FUNCTION `id_buku_auto` (`num` INT) RETURNS CHAR(5) CHARSET utf8mb4 COLLATE utf8mb4_general_ci  BEGIN
-DECLARE kodebaru CHAR(5);
-DECLARE urut INT;
- 
-SET urut = IF(num IS NULL, 1, num + 1);
-SET kodebaru = CONCAT("BK", LPAD(urut, 3, 0));
- 
-RETURN kodebaru;
-END$$
-
-CREATE DEFINER=`root`@`localhost` FUNCTION `id_kategori_auto` (`num` INT) RETURNS CHAR(5) CHARSET utf8mb4 COLLATE utf8mb4_general_ci  BEGIN
-DECLARE kodebaru CHAR(5);
-DECLARE urut INT;
- 
-SET urut = IF(num IS NULL, 1, num + 1);
-SET kodebaru = CONCAT("KT", LPAD(urut, 3, 0));
- 
-RETURN kodebaru;
-END$$
-
-CREATE DEFINER=`root`@`localhost` FUNCTION `id_peminjaman_auto` (`num` INT) RETURNS CHAR(7) CHARSET utf8mb4 COLLATE utf8mb4_general_ci  BEGIN
-DECLARE kodebaru CHAR(7);
-DECLARE urut INT;
- 
-SET urut = IF(num IS NULL, 1, num + 1);
-SET kodebaru = CONCAT("PJ", LPAD(urut, 5, 0));
- 
-RETURN kodebaru;
-END$$
-
-CREATE DEFINER=`root`@`localhost` FUNCTION `id_pengurus_auto` (`num` INT) RETURNS CHAR(5) CHARSET utf8mb4 COLLATE utf8mb4_general_ci  BEGIN
-DECLARE kodebaru CHAR(5);
-DECLARE urut INT;
- 
-SET urut = IF(num IS NULL, 1, num + 1);
-SET kodebaru = CONCAT("PG", LPAD(urut, 3, 0));
- 
-RETURN kodebaru;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -128,26 +82,6 @@ INSERT INTO `buku` (`id_buku`, `judul`, `id_kategori`, `id_rak`, `isbn`, `pengar
 ('BK009', 'Juru kunci makam', 'KT003', 'FK001', '-', 'Sinta Yudisia, 1974- (pengarang) Ayu Wulan (penyunting bahasa)', 'Indiva Media Kreasi', '2020', 2, '133 halaman : ilustrasi ; 19 cm', 'buku/buku.jpg'),
 ('BK010', 'Kartun Kalkulus', 'KT002', 'NF001', '978-602-481-620-9', 'Gonick, Larry (pengarang) Mharta Adji Wardana (penerjemah) Andya Primanda (penyunting)', 'Kepustakaan Populer Gramedia', '2021', 3, 'Xii, 243 halaman : ilustrasi : 23 cm', 'buku/BK010.jpg');
 
---
--- Trigger `buku`
---
-DELIMITER $$
-CREATE TRIGGER `before_insert_buku` BEFORE INSERT ON `buku` FOR EACH ROW BEGIN
-DECLARE s VARCHAR(5);
-DECLARE i INT;
- 
-SET i = (SELECT SUBSTRING(id_buku,3,3) AS num
-FROM buku ORDER BY num DESC LIMIT 1);
- 
-SET s = (SELECT id_buku_auto(i));
- 
-IF(NEW.id_buku IS NULL OR NEW.id_buku = '')
- THEN SET NEW.id_buku = s;
-END IF;
-END
-$$
-DELIMITER ;
-
 -- --------------------------------------------------------
 
 --
@@ -167,26 +101,6 @@ INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 ('KT001', 'Novel'),
 ('KT002', 'Non-Fiksi'),
 ('KT003', 'Fiksi');
-
---
--- Trigger `kategori`
---
-DELIMITER $$
-CREATE TRIGGER `before_insert_kategori` BEFORE INSERT ON `kategori` FOR EACH ROW BEGIN
-DECLARE s VARCHAR(5);
-DECLARE i INT;
- 
-SET i = (SELECT SUBSTRING(id_kategori,3,3) AS num
-FROM kategori ORDER BY num DESC LIMIT 1);
- 
-SET s = (SELECT id_kategori_auto(i));
- 
-IF(NEW.id_kategori IS NULL OR NEW.id_kategori = '')
- THEN SET NEW.id_kategori = s;
-END IF;
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -213,27 +127,10 @@ INSERT INTO `peminjaman` (`id_peminjaman`, `id_buku`, `nim`, `tanggal_pinjam`, `
 ('PJ00004', 'BK009', 'H1D021043', '2022-10-15 07:15:45', '2022-10-16 08:56:54', 0, 'done'),
 ('PJ00007', 'BK001', 'H1D021043', '2022-11-02 17:51:59', '2022-11-04 14:52:10', 0, 'done'),
 ('PJ00009', 'BK002', 'H1D021043', '2022-11-12 10:49:41', '2022-11-24 11:52:25', 5000, 'done'),
-('PJ00014', 'BK009', 'H1D021043', '2022-11-28 15:51:36', '2022-12-02 10:53:03', 0, 'done');
-
---
--- Trigger `peminjaman`
---
-DELIMITER $$
-CREATE TRIGGER `before_insert_peminjaman` BEFORE INSERT ON `peminjaman` FOR EACH ROW BEGIN
-DECLARE s VARCHAR(7);
-DECLARE i INT;
- 
-SET i = (SELECT SUBSTRING(id_peminjaman,3,5) AS num
-FROM peminjaman ORDER BY num DESC LIMIT 1);
- 
-SET s = (SELECT id_peminjaman_auto(i));
- 
-IF(NEW.id_peminjaman IS NULL OR NEW.id_peminjaman = '')
- THEN SET NEW.id_peminjaman = s;
-END IF;
-END
-$$
-DELIMITER ;
+('PJ00014', 'BK009', 'H1D021043', '2022-11-28 15:51:36', '2022-12-02 10:53:03', 0, 'done'),
+('PJ00015', 'BK002', 'H1D021111', '2023-05-28 11:38:39', NULL, 0, 'process'),
+('PJ00016', 'BK010', 'H1D021043', '2023-05-28 11:54:23', NULL, 0, 'process'),
+('PJ00017', 'BK001', 'H1D021111', '2023-05-28 12:29:50', NULL, 0, 'process');
 
 -- --------------------------------------------------------
 
@@ -257,26 +154,6 @@ INSERT INTO `pengurus` (`id_pengurus`, `nama`, `password`, `level`, `pic`) VALUE
 ('PG001', 'Prijatno', '$2y$10$EOCmFf3z4mVqGIddpokmyeb4plfn4Je2be0LUj7LXxFOFxfCiBCve', 'owner', 'pengurus/admin.png'),
 ('PG002', 'Djoko', '$2y$10$/flqnrdWAWqsWKYNz8nGSeiSilr63/IyP98IpA7sdfck4sH67maJq', 'petugas', 'pengurus/admin.png'),
 ('PG003', 'zambo', '$2y$10$EK0MAa0SKGBa1tsyLpZEx.sH6BEiqM/magYFxJxwmoQP/Rlns7y/e', 'owner', 'pengurus/PG003.jpg');
-
---
--- Trigger `pengurus`
---
-DELIMITER $$
-CREATE TRIGGER `before_insert_pengurus` BEFORE INSERT ON `pengurus` FOR EACH ROW BEGIN
-DECLARE s VARCHAR(5);
-DECLARE i INT;
- 
-SET i = (SELECT SUBSTRING(id_pengurus,3,3) AS num
-FROM pengurus ORDER BY num DESC LIMIT 1);
- 
-SET s = (SELECT id_pengurus_auto(i));
- 
-IF(NEW.id_pengurus IS NULL OR NEW.id_pengurus = '')
- THEN SET NEW.id_pengurus = s;
-END IF;
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
