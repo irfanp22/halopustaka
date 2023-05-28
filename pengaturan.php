@@ -70,9 +70,9 @@ if(isset($_POST['edit'])){
 ?>
 <div class="container">
     <div class="col-md-12">
-        <div class="card" style="margin-top: 100px; margin-bottom: 20px;">
+        <div class="card mt-3">
             <div class="card-body">
-                <h4 class="text-center">Edit Data Profile</h4>
+                <h4 class="text-center mt-3 mb-3">Edit Data Profil</h4>
                 <form action="pengaturan.php" method="post" name="edit" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-sm-3">

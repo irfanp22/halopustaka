@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
         <div class="col-md-8">
             <div class="card mt-4">
                 <div class="card-body">
-                    <h4 class="text-center">Data Profile</h4>
+                    <h4 class="text-center">Data Profil</h4>
                     <div class="row">
                         <div class="col-sm-3">
                             <h6 class="mb-0">NIM</h6>

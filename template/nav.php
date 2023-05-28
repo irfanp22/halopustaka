@@ -35,7 +35,7 @@
                     echo $nama .
                         '</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                    <li><a href="profil.php">Profile</a></li>
+                    <li><a href="profil.php">Profil</a></li>
                     <li><a href="pengaturan.php">Pengaturan</a></li>
                     <div class="dropdown-divider"></div>
                     <li><a href="keluar.php">Logout</a></li>

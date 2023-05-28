@@ -302,9 +302,9 @@ if ($title == "Daftar Buku" || $title == "Profil") {
                 inputValue: '0',
                 inputPlaceholder: "Masukan denda tambahan",
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Ya',
-                cancelButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
                 cancelButtonText: "Batal",
             }).then(result => {
                 if (result.isConfirmed) {

@@ -15,11 +15,11 @@ if (isset($_POST['id_peminjaman'])) {
         $data['denda'] = $row['denda'];
         $data['status'] = $row['status'];
         if ($data['status'] == "done") {
-            $data['badge'] = "badge badge-success";
+            $data['badge'] = "badge bg-success";
         } elseif ($data['status'] == "process") {
-            $data['badge'] = "badge badge-primary";
+            $data['badge'] = "badge bg-primary";
         } else {
-            $data['badge'] = "badge badge-warning";
+            $data['badge'] = "badge bg-warning";
         }
         echo json_encode($data);
     } else {

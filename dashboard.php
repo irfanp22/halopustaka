@@ -4,7 +4,7 @@ $css = "admin.css";
 session_start();
 include "template/head.php";
 include "koneksi.php";
-if (isset($_SESSION['username']) && $_SESSION['role'] == "anggota")
+if ((isset($_SESSION['username']) && $_SESSION['role'] == "anggota") || !isset($_SESSION['username']))
     header('location: index.php');
 ?>
 
