@@ -219,7 +219,7 @@ if ($title == "Daftar Buku" || $title == "Profil") {
             Swal.fire({
                 title: "Yakin hapus data?<?php if ($_GET['page'] == "viewrak")
                     echo " Data buku juga akan terhapus!" ?> ",
-                                                                                                                                                                                            icon: 'warning',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Ya',
@@ -292,18 +292,19 @@ if ($title == "Daftar Buku" || $title == "Profil") {
             return false;
         });
 
-        $(".confirmKembali").on("click", function () {
-            var id_kem = $(this).data('id');
+        $(".confirmKembali").on("click", function() {
+            var id = $(this).data('id');
             Swal.fire({
                 title: "Yakin Konfirmasi Pengembalian?",
                 icon: 'warning',
                 input: "text",
                 inputLabel: "Denda tambahan",
+                inputValue: '0',
                 inputPlaceholder: "Masukan denda tambahan",
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
+                confirmButtonColor: '#d33',
                 confirmButtonText: 'Ya',
-                cancelButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
                 cancelButtonText: "Batal",
             }).then(result => {
                 if (result.isConfirmed) {
@@ -312,16 +313,16 @@ if ($title == "Daftar Buku" || $title == "Profil") {
                         method: "POST",
                         data: {
                             'dendaplus': result.value,
-                            'id_kem': id_kem
+                            'id_kem': id
                         },
                         dataType: "JSON",
-                        success: function (data) {
-                            if (data.msg == 1) Swal.fire("Pengembalian Berhasil Dikonfirmasi", "", "success").then(function () {
+                        success: function(data) {
+                            if (data.msg == 1) Swal.fire("Pengembalian Berhasil Dikonfirmasi", "", "success").then(function() {
                                 window.location.assign('?page=viewpeminjaman')
                             });
                             else Swal.fire("Pengembalian Gagal Dikonfirmasi", "", "error");
                         },
-                        error: function () {
+                        error: function() {
                             Swal.fire("JSON ERROR", "", "error");
                         }
                     })
@@ -394,7 +395,7 @@ if ($title == "Daftar Buku" || $title == "Profil") {
             })
         });
 
-        $('.btneditpeminjaman').click(function () {
+        $('.btneditpeminjaman').click(function() {
             var id_peminjaman = $(this).data('id');
             $('.id_peminjaman').val(id_peminjaman);
             $.ajax({
@@ -404,17 +405,16 @@ if ($title == "Daftar Buku" || $title == "Profil") {
                     id_peminjaman: id_peminjaman
                 },
                 dataType: "JSON",
-                success: function (data) {
+                success: function(data) {
                     $('#id_buku_edit').data('selectize').setValue(data.id_buku);
                     $('#nim_edit').data('selectize').setValue(data.nim);
                     if (data.status == "process") {
-                        $('#btnkembali').data('id', data.id_peminjaman); // Update the data-id attribute
+                        $('#btnkembali').attr('data-id', data.id_peminjaman);
                     } else {
-                        $('#btnkembali').removeAttr('data-id'); // Remove the data-id attribute
-                        $('#btnkembali').hide(); // Optionally hide the button
+                        document.getElementById('btnkembali').remove();
                     }
                 }
-            });
+            })
         });
 
         $('.btndetailmahasiswa').click(function () {
